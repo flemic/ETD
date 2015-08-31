@@ -8,7 +8,6 @@ from pymongo import Connection
 from functools import wraps
 from flask import url_for
 import raw_data_pb2
-import raw_metadata_pb2
 import json
 import urllib2
 import pymongo
