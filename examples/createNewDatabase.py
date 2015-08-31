@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""createNewDatabase.py: Creates new database in the R2DM service."""
+"""createNewDatabase.py: Creates a new database in the ETD service."""
 
 __author__ = "Filip Lemic"
-__copyright__ = "Copyright 2015, EVARILOS Project"
+__copyright__ = "Copyright 2015, Telecommunciation Networks Group (TKN), TU Berlin"
 
 __version__ = "1.0.0"
 __maintainer__ = "Filip Lemic"
@@ -21,7 +21,7 @@ apiURL = 'http://localhost:5000/'
 # Database name 
 db_id = 'test_db'
 
-req = urllib2.Request(apiURL + 'evarilos/raw_data/v1.0/database', headers={"Content-Type": "application/json"}, data = db_id)
+req = urllib2.Request(apiURL + 'etd/v1.0/database', headers={"Content-Type": "application/json"}, data = db_id)
 resp = urllib2.urlopen(req)
 response = json.loads(resp.read())
 print response	

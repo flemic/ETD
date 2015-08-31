@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""getMessage.py: Get a message from a collection in the R2DM service."""
+"""getMessage.py: Get a message from a collection in the ETD service."""
 
 __author__ = "Filip Lemic"
-__copyright__ = "Copyright 2015, EVARILOS Project"
+__copyright__ = "Copyright 2015, Telecommunciation Networks Group (TKN), TU Berlin"
 
 __version__ = "1.0.0"
 __maintainer__ = "Filip Lemic"
@@ -31,14 +31,14 @@ data_id = 'test_data'
 
 ## Getting message as a protobuffer string
 raw_data_collection = raw_data_pb2.RawRFReadingCollection() 
-req = RequestWithMethod(apiURL + 'evarilos/raw_data/v1.0/database/' + db_id  + '/collection/' + coll_id + '/message/' + data_id, 'GET', headers={"Content-Type": "application/json"}, data = 'protobuf')
+req = RequestWithMethod(apiURL + 'etd/v1.0/database/' + db_id  + '/collection/' + coll_id + '/message/' + data_id, 'GET', headers={"Content-Type": "application/json"}, data = 'protobuf')
 response = urllib2.urlopen(req)
 message = response.read()
 raw_data_collection.ParseFromString(message)
 print raw_data_collection
 
 ## Getting message as a json object
-req = RequestWithMethod(apiURL + 'evarilos/raw_data/v1.0/database/' + db_id  + '/collection/' + coll_id + '/message/' + data_id, 'GET', headers={"Content-Type": "application/json"}, data = 'json')
+req = RequestWithMethod(apiURL + 'etd/v1.0/database/' + db_id  + '/collection/' + coll_id + '/message/' + data_id, 'GET', headers={"Content-Type": "application/json"}, data = 'json')
 response = urllib2.urlopen(req)
 message = response.read()
 print message

@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""replaceMessage.py: Replaces a message in a collection in the R2DM service using HTTP PUT method."""
+"""replaceMessage.py: Replaces a message in a collection in the ETD service."""
 
 __author__ = "Filip Lemic"
-__copyright__ = "Copyright 2015, EVARILOS Project"
+__copyright__ = "Copyright 2015, Telecommunciation Networks Group (TKN), TU Berlin"
 
 __version__ = "1.0.0"
 __maintainer__ = "Filip Lemic"
@@ -62,6 +62,6 @@ if __name__ == '__main__':
 
     obj = raw_data_collection.SerializeToString()
 
-    req = RequestWithMethod(apiURL + 'evarilos/raw_data/v1.0/database/' + db_id + '/collection/' + coll_id + '/message/' + data_id, 'PUT', headers={"Content-Type": "application/x-protobuf"}, data = obj)
+    req = RequestWithMethod(apiURL + 'etd/v1.0/database/' + db_id + '/collection/' + coll_id + '/message/' + data_id, 'PUT', headers={"Content-Type": "application/x-protobuf"}, data = obj)
     resp = urllib2.urlopen(req)
     print json.loads(resp.read())

@@ -1,8 +1,8 @@
 ////////////////////////////////////////////////////////////////////////////////////
-// raw_data.proto: Message used for storing the raw data in the R2DM service.
+// raw_data.proto: Message used for storing the raw data and training fingerprints in the ETD service.
 //
 // __author__ = "Filip Lemic"
-// __copyright__ = "Copyright 2014, EVARILOS Project"
+// __copyright__ = "Copyright 2015, Telecommunciation Networks Group (TKN), TU Berlin"
 //
 // __version__ = "1.0.0"
 // __maintainer__ = "Filip Lemic"
@@ -19,14 +19,10 @@ message RawRFReading {
   optional string receiver_bssid = 4;            // BSSID of the receiver
   optional string channel = 5;                   // Channel
   optional int32 rssi = 6;                       // RSSI (Received Signal Strength)
-  optional float lqi = 7;                        // LQI (Link Quality Indication)
-  optional float ToA = 8;                        // ToA (Time of Arrival)
-  optional float AoA = 9;                        // AoA (Angle of Arrival)
-  optional int64 timestamp_utc = 10;             // Milliseconds from 1.1.1970. time
-  optional int32 run_nr = 11;                    // Run number
-  optional bool is_ack = 12 [default = false];   // Is message an ACK?
-  optional Location sender_location = 13;        // Location of the sender
-  optional Location receiver_location = 14;      // Location of the receiver
+  optional int64 timestamp_utc = 7;              // Milliseconds from 1.1.1970. time
+  optional int32 run_nr = 8;                     // Run number
+  optional Location sender_location = 9;         // Location of the sender
+  optional Location receiver_location = 10;      // Location of the receiver
 	
   message Location {
     optional double coordinate_x = 1;            // x-coordinate
@@ -38,11 +34,10 @@ message RawRFReading {
 } 
 
 message RawRFReadingCollection {
-  required string metadata_id = 1;               // Connection to the metadata
-  repeated RawRFReading raw_measurement = 2;     // Collections of raw RSSI data
-  required int32 meas_number = 3;                // Number of measurments
-  required string data_id = 4;                   // ID of the data
-  optional bytes _id = 5;                        // Internal ID given by the MongoDB 
-  optional int64 timestamp_utc_start = 6;        // Milliseconds from 1.1.1970. start time
-  optional int64 timestamp_utc_stop = 7;         // Milliseconds from 1.1.1970. stop time
+  repeated RawRFReading raw_measurement = 1;     // Collections of raw RSSI data
+  required int32 meas_number = 2;                // Number of measurments
+  required string data_id = 3;                   // ID of the data
+  optional bytes _id = 4;                        // Internal ID given by the MongoDB 
+  optional int64 timestamp_utc_start = 5;        // Milliseconds from 1.1.1970. start time
+  optional int64 timestamp_utc_stop = 6;         // Milliseconds from 1.1.1970. stop time
 }

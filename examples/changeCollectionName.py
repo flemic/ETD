@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""changeCollectionName.py: Change the name of a collection in the R2DM service."""
+"""changeCollectionName.py: Change the name of a collection in the ETD service."""
 
 __author__ = "Filip Lemic"
-__copyright__ = "Copyright 2015, EVARILOS Project"
+__copyright__ = "Copyright 2015, Telecommunciation Networks Group (TKN), TU Berlin"
 
 __version__ = "1.0.0"
 __maintainer__ = "Filip Lemic"
@@ -28,7 +28,7 @@ coll_id = 'test_coll_01'
 # The new name of the collection in the database
 new_name = 'test_coll_02'
 
-req = RequestWithMethod(apiURL + 'evarilos/raw_data/v1.0/database/' + db_id + '/collection/' + coll_id, 'PATCH', headers={"Content-Type": "application/json"}, data = new_name)
+req = RequestWithMethod(apiURL + 'etd/v1.0/database/' + db_id + '/collection/' + coll_id, 'PATCH', headers={"Content-Type": "application/json"}, data = new_name)
 resp = urllib2.urlopen(req)
 response = json.loads(resp.read())
 print response

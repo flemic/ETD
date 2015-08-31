@@ -73,7 +73,7 @@ def hello():
 #######################################################################################################
 # Task 1: Get the list of all databases [GET]
 #######################################################################################################
-@app.route('/evarilos/raw_data/v1.0/database', methods = ['GET'])
+@app.route('/etd/v1.0/database', methods = ['GET'])
 @crossdomain(origin='*')
 def databases():
 
@@ -95,7 +95,7 @@ def databases():
 #######################################################################################################
 # Task 2: Get the list of all collections in the database [GET]
 #######################################################################################################
-@app.route('/evarilos/raw_data/v1.0/database/<db_id>/collection', methods = ['GET'])
+@app.route('/etd/v1.0/database/<db_id>/collection', methods = ['GET'])
 @crossdomain(origin='*')
 def database(db_id):
 
@@ -122,7 +122,7 @@ def database(db_id):
 #######################################################################################################
 # Task 3: Get the list of messages description from the collection [GET]
 #######################################################################################################
-@app.route('/evarilos/raw_data/v1.0/database/<db_id>/collection/<coll_id>/message', methods = ['GET'])
+@app.route('/etd/v1.0/database/<db_id>/collection/<coll_id>/message', methods = ['GET'])
 @crossdomain(origin='*')
 def collection(db_id, coll_id):
 
@@ -166,7 +166,7 @@ def collection(db_id, coll_id):
 #######################################################################################################
 # Task 4: Get the message from the collection [GET]
 #######################################################################################################
-@app.route('/evarilos/raw_data/v1.0/database/<db_id>/collection/<coll_id>/message/<data_id>', methods = ['GET'])
+@app.route('/etd/v1.0/database/<db_id>/collection/<coll_id>/message/<data_id>', methods = ['GET'])
 @crossdomain(origin='*')
 def message(db_id, coll_id, data_id): 
 
@@ -204,7 +204,7 @@ def message(db_id, coll_id, data_id):
 #######################################################################################################
 # Task 5: Add a message into the collection [POST]
 #######################################################################################################
-@app.route('/evarilos/raw_data/v1.0/database/<db_id>/collection/<coll_id>', methods = ['POST'])
+@app.route('/etd/v1.0/database/<db_id>/collection/<coll_id>', methods = ['POST'])
 @crossdomain(origin='*')
 def store_message(db_id, coll_id):
 
@@ -255,7 +255,7 @@ def store_message(db_id, coll_id):
 #######################################################################################################
 # Task 6: Creating a new collection in the database [POST]
 #######################################################################################################
-@app.route('/evarilos/raw_data/v1.0/database/<db_id>/collection', methods = ['POST'])
+@app.route('/etd/v1.0/database/<db_id>/collection', methods = ['POST'])
 @crossdomain(origin='*')
 def create_collection(db_id):
     
@@ -287,7 +287,7 @@ def create_collection(db_id):
 #######################################################################################################
 # Task 7: Creating a new database [POST]
 #######################################################################################################
-@app.route('/evarilos/raw_data/v1.0/database', methods = ['POST'])
+@app.route('/etd/v1.0/database', methods = ['POST'])
 @crossdomain(origin='*')
 def create_database():
     
@@ -316,7 +316,7 @@ def create_database():
 #######################################################################################################
 # Task 8: Delete the database [DELETE]
 #######################################################################################################
-@app.route('/evarilos/raw_data/v1.0/database/<db_id>', methods = ['DELETE'])
+@app.route('/etd/v1.0/database/<db_id>', methods = ['DELETE'])
 # @basic_auth.required
 @crossdomain(origin='*')
 def delete_database(db_id):
@@ -343,7 +343,7 @@ def delete_database(db_id):
 #######################################################################################################
 # Task 9: Delete the collection from the database [DELETE]
 #######################################################################################################
-@app.route('/evarilos/raw_data/v1.0/database/<db_id>/collection/<coll_id>', methods = ['DELETE'])
+@app.route('/etd/v1.0/database/<db_id>/collection/<coll_id>', methods = ['DELETE'])
 @crossdomain(origin='*')
 def delete_collection(db_id, coll_id):
 
@@ -374,7 +374,7 @@ def delete_collection(db_id, coll_id):
 #######################################################################################################
 # Task 10: Delete the mesage from the collection [DELETE]
 #######################################################################################################
-@app.route('/evarilos/raw_data/v1.0/database/<db_id>/collection/<coll_id>/message/<data_id>', methods = ['DELETE'])
+@app.route('/etd/v1.0/database/<db_id>/collection/<coll_id>/message/<data_id>', methods = ['DELETE'])
 @crossdomain(origin='*')
 def delete_message(db_id, coll_id, data_id):
 
@@ -404,7 +404,7 @@ def delete_message(db_id, coll_id, data_id):
 #######################################################################################################
 # Task 11: Replace the message [PUT]
 #######################################################################################################
-@app.route('/evarilos/raw_data/v1.0/database/<db_id>/collection/<coll_id>/message/<data_id>', methods = ['PUT'])
+@app.route('/etd/v1.0/database/<db_id>/collection/<coll_id>/message/<data_id>', methods = ['PUT'])
 @crossdomain(origin='*')
 def replace_message(db_id, coll_id, data_id):
 
@@ -476,7 +476,7 @@ def replace_message(db_id, coll_id, data_id):
 #######################################################################################################
 # Task 12: Change the message parameters [PATCH]
 #######################################################################################################
-@app.route('/evarilos/raw_data/v1.0/database/<db_id>/collection/<coll_id>/message/<data_id>', methods = ['PATCH'])
+@app.route('/etd/v1.0/database/<db_id>/collection/<coll_id>/message/<data_id>', methods = ['PATCH'])
 @crossdomain(origin='*')
 def change_message(db_id, coll_id, data_id):
 
@@ -526,7 +526,7 @@ def change_message(db_id, coll_id, data_id):
 #######################################################################################################
 # Task 13: Change the collection name [PATCH]
 #######################################################################################################
-@app.route('/evarilos/raw_data/v1.0/database/<db_id>/collection/<coll_id>', methods = ['PATCH'])
+@app.route('/etd/v1.0/database/<db_id>/collection/<coll_id>', methods = ['PATCH'])
 @crossdomain(origin='*')
 def change_collection(db_id, coll_id):
 
@@ -555,9 +555,6 @@ def change_collection(db_id, coll_id):
     except:
         return json.dumps("Unable to change the name of the collection!")
     return json.dumps("Collection's name changed!")
-#######################################################################################################
-# Task 14: Change the database name [PATCH]
-#######################################################################################################
 
 #######################################################################################################
 # Additional help functions

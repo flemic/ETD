@@ -4,7 +4,7 @@
 """wifiFingerprint.py: Generate a fingerprint of the WiFi environment (Linux, Mac OS)."""
 
 __author__ = "Filip Lemic"
-__copyright__ = "Copyright 2015, EVARILOS Project"
+__copyright__ = "Copyright 2015, Telecommunciation Networks Group (TKN), TU Berlin"
 
 __version__ = "1.0.0"
 __maintainer__ = "Filip Lemic"
@@ -17,8 +17,7 @@ import re
 
 class wifiFingerprint():
     """
-    This class uses the built-in Apple AirPort to perform a scan for nearby Access Points
-
+    This class uses the built-in Apple AirPort function to perform a scan for nearby WiFi beacon packets' RSSIs
     fingerprint has the following structure:
     { "bssid": {"rssi": [ rssi1, rssi2, rssi3, ... ], "ssid": "<ssid>", "channel": "<channel>" },
       "bssid2": ...

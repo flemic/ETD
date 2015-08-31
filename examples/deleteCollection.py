@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""deleteCollection.py: Delete a collection in the R2DM service."""
+"""deleteCollection.py: Delete a collection in the ETD service."""
 
 __author__ = "Filip Lemic"
-__copyright__ = "Copyright 2015, EVARILOS Project"
+__copyright__ = "Copyright 2015, Telecommunciation Networks Group (TKN), TU Berlin"
 
 __version__ = "1.0.0"
 __maintainer__ = "Filip Lemic"
@@ -25,7 +25,7 @@ db_id = 'test_db'
 # The ID of the collection in the database
 coll_id = 'test_coll'
 
-req = RequestWithMethod(apiURL + 'evarilos/raw_data/v1.0/database/' + db_id + '/collection/' + coll_id, 'DELETE', headers={"Content-Type": "application/json"})
+req = RequestWithMethod(apiURL + 'etd/v1.0/database/' + db_id + '/collection/' + coll_id, 'DELETE', headers={"Content-Type": "application/json"})
 resp = urllib2.urlopen(req)
 response = json.loads(resp.read())
 print response	

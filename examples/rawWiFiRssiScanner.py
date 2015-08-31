@@ -4,7 +4,7 @@
 """rawRssiScanner.py: Scans the WiFi environment for RSSI values from WiFi beacon packets."""
 
 __author__ = "Filip Lemic"
-__copyright__ = "Copyright 2015, EVARILOS Project"
+__copyright__ = "Copyright 2015, Telecommunciation Networks Group (TKN), TU Berlin"
 
 __version__ = "1.0.0"
 __maintainer__ = "Filip Lemic"
@@ -46,7 +46,7 @@ if __name__ == '__main__':
             raw_data_reading = raw_data_collection.raw_measurement.add()
             x = datetime.utcnow()
             raw_data_reading.timestamp_utc = timestamp_utc = int(time.mktime(x.timetuple()))
-            raw_data_reading.receiver_id = 'MacBook'
+            raw_data_reading.receiver_id = 'test'
             raw_data_reading.receiver_location.coordinate_x = 1
             raw_data_reading.receiver_location.coordinate_y = 1
             raw_data_reading.receiver_location.coordinate_z = 1
@@ -59,6 +59,6 @@ if __name__ == '__main__':
 
     obj = raw_data_collection.SerializeToString()
 
-    req = urllib2.Request(apiURL + 'evarilos/raw_data/v1.0/database/' + db_id + '/collection/' + coll_id, headers={"Content-Type": "application/x-protobuf"}, data = obj)
+    req = urllib2.Request(apiURL + 'etd/v1.0/database/' + db_id + '/collection/' + coll_id, headers={"Content-Type": "application/x-protobuf"}, data = obj)
     resp = urllib2.urlopen(req)
     print json.loads(resp.read())
