@@ -15,12 +15,12 @@ The Enriched Training Database (ETD) a web-based service that enables storage an
 
 * <a href="http://flask.pocoo.org/">Flask</a> - a Python micro-framework for creating RESTful web services.
 * <a href="https://www.mongodb.org/">MongoDB</a> - an open-source Not only SQL (NoSQL) database.
-* <a href="https://developers.google.com/protocol-buffers/">Google Protocol Buffers</a> - mechanism for encoding and serializing structured data using an efficient and extensible binary format.
+* <a href="https://developers.google.com/protocol-buffers/">Google Protocol Buffers</a> - mechanism for encoding and serializing structured data.
 
 <a name="installation"></a>
 ## Installation and Setup
 
-* Start a MongoDB service on a defined <port_num> (default port number 27017) and provide a path to folder where the data will be stored <path_to_data>.
+* Start a MongoDB service on a defined port number (default port number 27017) and provide the path to a folder where data will be stored.
 
  ```vim
  sudo mongod --dbpath <path_to_data> --port <port_num> 
