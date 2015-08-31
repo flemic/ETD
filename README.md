@@ -8,6 +8,7 @@ The Enriched Training Database (ETD) a web-based service that enables storage an
 	- [Requirements](#setup)
 	- [Installation and Setup](#installation)
 	- [Basic Usage](#basic-usage)
+	- [Raw Data Format](#raw_data)
 	- [Enriching Functionality](#enriched-usage)
 
 <a name="setup"></a>
@@ -27,7 +28,7 @@ The Enriched Training Database (ETD) a web-based service that enables storage an
  sudo mongod --dbpath <path_to_data> --port <port_num> 
  ```
 
-* Download the ETD service and navigate to the etd_core folder. Set the MongoDB port number and hostname ('localhost' if both MondoDB and ETD services are running on the same machine) -  lines 19 and 20 in the _etd_core.py_. Set the ETD service host and port  -  last line in the _etd_core.py_.  Start the ETD service with: 
+* Download the ETD service and navigate to the etd_core folder. Set the MongoDB port number and hostname ('localhost' if MongoDB and ETD services are running on the same machine) -  lines 19 and 20 in the _etd_core.py_. Set the ETD service host and port  -  last line in the _etd_core.py_.  Start the ETD service with: 
 
  ```vim
  python etd_core.py 
@@ -52,6 +53,41 @@ A set of Python scripts that allows basic data management in the ETD service is 
 * Delete collection: _deleteCollection.py_
 Delete database: _deleteDatabase.py_
 
+
+<a name="raw_data"></a>
+## Raw Data Format
+
+```vim
+message RawRFReading {
+  optional string sender_id = 1;                 // ID of the sender
+  optional string sender_bssid = 2;              // BSSID of the sender
+  optional string receiver_id = 3;               // ID of the receiver
+  optional string receiver_bssid = 4;            // BSSID of the receiver
+  optional string channel = 5;                   // Channel
+  optional int32 rssi = 6;                       // RSSI (Received Signal Strength)
+  optional int64 timestamp_utc = 7;              // Milliseconds from 1.1.1970. time
+  optional int32 run_nr = 8;                     // Run number
+  optional Location sender_location = 9;         // Location of the sender
+  optional Location receiver_location = 10;      // Location of the receiver
+	
+  message Location {
+    optional double coordinate_x = 1;            // x-coordinate
+    optional double coordinate_y = 2;            // y-coordinate
+    optional double coordinate_z = 3;            // z-coordinate
+    optional string room_label = 4;              // Room label
+    optional string node_label = 5;              // Additional label
+  }
+} 
+
+message RawRFReadingCollection {
+  repeated RawRFReading raw_measurement = 1;     // Collections of raw RSSI data
+  required int32 meas_number = 2;                // Number of measurments
+  required string data_id = 3;                   // ID of the data
+  optional bytes _id = 4;                        // Internal ID given by the MongoDB 
+  optional int64 timestamp_utc_start = 5;        // Milliseconds from 1.1.1970. start time
+  optional int64 timestamp_utc_stop = 6;         // Milliseconds from 1.1.1970. stop time
+}
+```
 
 <a name="enriched-usage"></a>
 ## Enriching Functionality
