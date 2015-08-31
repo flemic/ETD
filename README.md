@@ -93,10 +93,13 @@ This message can be changed according to the specific needs of a particular user
 ```vim
 protoc -I=$SRC_DIR --python_out=$DST_DIR $SRC_DIR/raw_data.proto
 ```
-This command will generate (if the new message is properly defined) a _raw_data_pb2.py_ file, and this file has to replace the obsolete versions in directories _examples_ and _etd_core_.
+This command will generate (if the new message is properly defined) a _raw_data_pb2.py_ file, and this file has to be used for replacing the obsolete version in directories _examples_ and _etd_core_.
 
 <a name="fingerprints"></a>
-## generating and Storing Training Fingerprints
+## Generating and Storing Training Fingerprints
+
+After collecting WiFi RSSI measurements at predefined locations and storing them in the ETD service, the user has to modify and then use the script _generateAndStoreFingerprints.py_ in the directory _help_functions_.   
+
 
 <a name="enriched-usage"></a>
 ## Enriching Functionality
