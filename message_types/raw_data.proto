@@ -2,7 +2,7 @@
 // raw_data.proto: Message used for storing the raw data and training fingerprints in the ETD service.
 //
 // __author__ = "Filip Lemic"
-// __copyright__ = "Copyright 2015, Telecommunciation Networks Group (TKN), TU Berlin"
+// __copyright__ = "Copyright 2015, Telecommunication Networks Group (TKN), TU Berlin"
 //
 // __version__ = "1.0.0"
 // __maintainer__ = "Filip Lemic"
@@ -14,28 +14,24 @@ package evarilos;
 
 message RawRFReading {
   optional string sender_id = 1;                 // ID of the sender
-  optional string sender_bssid = 2;              // BSSID of the sender
-  optional string receiver_id = 3;               // ID of the receiver
-  optional string receiver_bssid = 4;            // BSSID of the receiver
-  optional string channel = 5;                   // Channel
-  optional int32 rssi = 6;                       // RSSI (Received Signal Strength)
-  optional int64 timestamp_utc = 7;              // Milliseconds from 1.1.1970. time
-  optional int32 run_nr = 8;                     // Run number
-  optional Location sender_location = 9;         // Location of the sender
-  optional Location receiver_location = 10;      // Location of the receiver
+  required string sender_bssid = 2;              // BSSID of the sender
+  required string channel = 3;                   // Channel
+  required int32 rssi = 4;                       // RSSI (Received Signal Strength)
+  optional int64 timestamp_utc = 5;              // Milliseconds from 1.1.1970. time
+  required int32 run_nr = 6;                     // Run number
+  required Location receiver_location = 7;       // Location of the receiver
 	
   message Location {
-    optional double coordinate_x = 1;            // x-coordinate
-    optional double coordinate_y = 2;            // y-coordinate
+    required double coordinate_x = 1;            // x-coordinate
+    required double coordinate_y = 2;            // y-coordinate
     optional double coordinate_z = 3;            // z-coordinate
     optional string room_label = 4;              // Room label
-    optional string node_label = 5;              // Additional label
   }
 } 
 
 message RawRFReadingCollection {
   repeated RawRFReading raw_measurement = 1;     // Collections of raw RSSI data
-  required int32 meas_number = 2;                // Number of measurments
+  required int32 meas_number = 2;                // Number of measurements
   required string data_id = 3;                   // ID of the data
   optional bytes _id = 4;                        // Internal ID given by the MongoDB 
   optional int64 timestamp_utc_start = 5;        // Milliseconds from 1.1.1970. start time
