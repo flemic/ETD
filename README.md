@@ -1,1 +1,3 @@
-# ETD - Enriched Training Database - first prototype, the rest is comming soon!
+# ETD - Enriched Training Database 
+
+First prototype, the rest is comming soon!
