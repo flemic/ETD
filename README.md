@@ -36,5 +36,22 @@ The Enriched Training Database (ETD) a web-based service that enables storage an
 <a name="basic-usage"></a>
 ## Basic Usage
 
+A set of Python scripts that allows basic data management in the ETD service is provided in the folder _examples_. At the moment all necessary parameters have to be defined by editing the scripts.  
+
+* Create new database: _createNewDatabase.py_ 
+* Create new collection: _createNewCollection.py_ 
+* Collect WiFi RSSI measurements: _rawWiFiRssiScanner.py_
+* Get message: _getMessage.py_
+* Get a list of messages in a collection: _getMessageList.py_
+* Get a list of collections in a database: _getCollections.py_
+* Get a list of databases: _getDatabases.py_
+* Change message parameters: _changeMessage.py_
+* Replace message: _replaceMessage.py_
+* Change the name of a collection: _changeCollectionName.py_
+* Delete message: _deleteMessage.py_
+* Delete collection: _deleteCollection.py_
+Delete database: _deleteDatabase.py_
+
+
 <a name="enriched-usage"></a>
 ## Enriching Functionality
