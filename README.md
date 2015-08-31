@@ -20,7 +20,7 @@ The Enriched Training Database (ETD) a web-based service that enables storage an
 <a name="installation"></a>
 ## Installation and Setup
 
-* Start a MongoDB service.
+* Start a MongoDB service on a defined <port_num> (default port number 27017) and provide a path to folder where the data will be stored <path_to_data>.
 
  ```vim
  sudo mongod --dbpath <path_to_data> --port <port_num> 
