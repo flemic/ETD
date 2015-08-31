@@ -16,6 +16,7 @@ The Enriched Training Database (ETD) a web-based service that enables storage an
 * <a href="http://flask.pocoo.org/">Flask</a> - a Python micro-framework for creating RESTful web services.
 * <a href="https://www.mongodb.org/">MongoDB</a> - an open-source Not only SQL (NoSQL) database.
 * <a href="https://developers.google.com/protocol-buffers/">Google Protocol Buffers</a> - mechanism for encoding and serializing structured data.
+* Python libraries: <a href="https://api.mongodb.org/python/current/"">PyMongo</a>, <a href="https://docs.python.org/2/library/functools.html">functools</a>, <a href="https://docs.python.org/2/library/json.html">json</a>, <a href="https://docs.python.org/2/library/urllib2.html">urllib2</a>, <a href="https://docs.python.org/2/library/datetime.html">datetime</a>  
 
 <a name="installation"></a>
 ## Installation and Setup

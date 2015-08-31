@@ -4,16 +4,19 @@ from flask import Response
 from flask import abort
 from flask import make_response
 from flask import request
+from flask import url_for
+from flask import make_response, request, current_app
+import pymongo
 from pymongo import Connection
 from functools import wraps
-from flask import url_for
-import raw_data_pb2
+from functools import update_wrapper
 import json
 import urllib2
-import pymongo
 from datetime import timedelta
-from flask import make_response, request, current_app
-from functools import update_wrapper
+import raw_data_pb2
+# MongoDB setup
+hostname = 'localhost'
+port_number = 27017
 
 def crossdomain(origin=None, methods=None, headers=None,
                 max_age=201600, attach_to_all=True,
@@ -53,14 +56,11 @@ def crossdomain(origin=None, methods=None, headers=None,
             return resp
 
         f.provide_automatic_options = False
-        return update_wrapper(wrapped_function, f)
+        return update_wrapper(wrapped_function, f)c
     return decorator
 
 app = Flask(__name__)
 
-# MongoDB setup
-hostname = 'localhost'
-port_number = 27017
 
 #######################################################################################################
 # Home - Hello World! I'm alive!!!!!
