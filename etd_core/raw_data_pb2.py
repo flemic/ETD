@@ -11,7 +11,7 @@ from google.protobuf import descriptor_pb2
 DESCRIPTOR = descriptor.FileDescriptor(
   name='raw_data.proto',
   package='evarilos',
-  serialized_pb='\n\x0eraw_data.proto\x12\x08\x65varilos\"\x96\x03\n\x0cRawRFReading\x12\x11\n\tsender_id\x18\x01 \x01(\t\x12\x14\n\x0csender_bssid\x18\x02 \x01(\t\x12\x13\n\x0breceiver_id\x18\x03 \x01(\t\x12\x16\n\x0ereceiver_bssid\x18\x04 \x01(\t\x12\x0f\n\x07\x63hannel\x18\x05 \x01(\t\x12\x0c\n\x04rssi\x18\x06 \x01(\x05\x12\x15\n\rtimestamp_utc\x18\x07 \x01(\x03\x12\x0e\n\x06run_nr\x18\x08 \x01(\x05\x12\x38\n\x0fsender_location\x18\t \x01(\x0b\x32\x1f.evarilos.RawRFReading.Location\x12:\n\x11receiver_location\x18\n \x01(\x0b\x32\x1f.evarilos.RawRFReading.Location\x1at\n\x08Location\x12\x14\n\x0c\x63oordinate_x\x18\x01 \x01(\x01\x12\x14\n\x0c\x63oordinate_y\x18\x02 \x01(\x01\x12\x14\n\x0c\x63oordinate_z\x18\x03 \x01(\x01\x12\x12\n\nroom_label\x18\x04 \x01(\t\x12\x12\n\nnode_label\x18\x05 \x01(\t\"\xb5\x01\n\x16RawRFReadingCollection\x12/\n\x0fraw_measurement\x18\x01 \x03(\x0b\x32\x16.evarilos.RawRFReading\x12\x13\n\x0bmeas_number\x18\x02 \x02(\x05\x12\x0f\n\x07\x64\x61ta_id\x18\x03 \x02(\t\x12\x0b\n\x03_id\x18\x04 \x01(\x0c\x12\x1b\n\x13timestamp_utc_start\x18\x05 \x01(\x03\x12\x1a\n\x12timestamp_utc_stop\x18\x06 \x01(\x03')
+  serialized_pb='\n\x0eraw_data.proto\x12\x08\x65varilos\"\x9b\x02\n\x0cRawRFReading\x12\x11\n\tsender_id\x18\x01 \x01(\t\x12\x14\n\x0csender_bssid\x18\x02 \x02(\t\x12\x0f\n\x07\x63hannel\x18\x03 \x02(\t\x12\x0c\n\x04rssi\x18\x04 \x02(\x05\x12\x15\n\rtimestamp_utc\x18\x05 \x01(\x03\x12\x0e\n\x06run_nr\x18\x06 \x02(\x05\x12:\n\x11receiver_location\x18\x07 \x02(\x0b\x32\x1f.evarilos.RawRFReading.Location\x1a`\n\x08Location\x12\x14\n\x0c\x63oordinate_x\x18\x01 \x02(\x01\x12\x14\n\x0c\x63oordinate_y\x18\x02 \x02(\x01\x12\x14\n\x0c\x63oordinate_z\x18\x03 \x01(\x01\x12\x12\n\nroom_label\x18\x04 \x01(\t\"\xb5\x01\n\x16RawRFReadingCollection\x12/\n\x0fraw_measurement\x18\x01 \x03(\x0b\x32\x16.evarilos.RawRFReading\x12\x13\n\x0bmeas_number\x18\x02 \x02(\x05\x12\x0f\n\x07\x64\x61ta_id\x18\x03 \x02(\t\x12\x0b\n\x03_id\x18\x04 \x01(\x0c\x12\x1b\n\x13timestamp_utc_start\x18\x05 \x01(\x03\x12\x1a\n\x12timestamp_utc_stop\x18\x06 \x01(\x03')
 
 
 
@@ -25,14 +25,14 @@ _RAWRFREADING_LOCATION = descriptor.Descriptor(
   fields=[
     descriptor.FieldDescriptor(
       name='coordinate_x', full_name='evarilos.RawRFReading.Location.coordinate_x', index=0,
-      number=1, type=1, cpp_type=5, label=1,
+      number=1, type=1, cpp_type=5, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
       name='coordinate_y', full_name='evarilos.RawRFReading.Location.coordinate_y', index=1,
-      number=2, type=1, cpp_type=5, label=1,
+      number=2, type=1, cpp_type=5, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -51,13 +51,6 @@ _RAWRFREADING_LOCATION = descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
-    descriptor.FieldDescriptor(
-      name='node_label', full_name='evarilos.RawRFReading.Location.node_label', index=4,
-      number=5, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
   ],
   extensions=[
   ],
@@ -67,8 +60,8 @@ _RAWRFREADING_LOCATION = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=319,
-  serialized_end=435,
+  serialized_start=216,
+  serialized_end=312,
 )
 
 _RAWRFREADING = descriptor.Descriptor(
@@ -87,63 +80,42 @@ _RAWRFREADING = descriptor.Descriptor(
       options=None),
     descriptor.FieldDescriptor(
       name='sender_bssid', full_name='evarilos.RawRFReading.sender_bssid', index=1,
-      number=2, type=9, cpp_type=9, label=1,
+      number=2, type=9, cpp_type=9, label=2,
       has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
-      name='receiver_id', full_name='evarilos.RawRFReading.receiver_id', index=2,
-      number=3, type=9, cpp_type=9, label=1,
+      name='channel', full_name='evarilos.RawRFReading.channel', index=2,
+      number=3, type=9, cpp_type=9, label=2,
       has_default_value=False, default_value=unicode("", "utf-8"),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
-      name='receiver_bssid', full_name='evarilos.RawRFReading.receiver_bssid', index=3,
-      number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    descriptor.FieldDescriptor(
-      name='channel', full_name='evarilos.RawRFReading.channel', index=4,
-      number=5, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=unicode("", "utf-8"),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    descriptor.FieldDescriptor(
-      name='rssi', full_name='evarilos.RawRFReading.rssi', index=5,
-      number=6, type=5, cpp_type=1, label=1,
+      name='rssi', full_name='evarilos.RawRFReading.rssi', index=3,
+      number=4, type=5, cpp_type=1, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
-      name='timestamp_utc', full_name='evarilos.RawRFReading.timestamp_utc', index=6,
-      number=7, type=3, cpp_type=2, label=1,
+      name='timestamp_utc', full_name='evarilos.RawRFReading.timestamp_utc', index=4,
+      number=5, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
-      name='run_nr', full_name='evarilos.RawRFReading.run_nr', index=7,
-      number=8, type=5, cpp_type=1, label=1,
+      name='run_nr', full_name='evarilos.RawRFReading.run_nr', index=5,
+      number=6, type=5, cpp_type=1, label=2,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     descriptor.FieldDescriptor(
-      name='sender_location', full_name='evarilos.RawRFReading.sender_location', index=8,
-      number=9, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      options=None),
-    descriptor.FieldDescriptor(
-      name='receiver_location', full_name='evarilos.RawRFReading.receiver_location', index=9,
-      number=10, type=11, cpp_type=10, label=1,
+      name='receiver_location', full_name='evarilos.RawRFReading.receiver_location', index=6,
+      number=7, type=11, cpp_type=10, label=2,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -158,7 +130,7 @@ _RAWRFREADING = descriptor.Descriptor(
   is_extendable=False,
   extension_ranges=[],
   serialized_start=29,
-  serialized_end=435,
+  serialized_end=312,
 )
 
 
@@ -220,12 +192,11 @@ _RAWRFREADINGCOLLECTION = descriptor.Descriptor(
   options=None,
   is_extendable=False,
   extension_ranges=[],
-  serialized_start=438,
-  serialized_end=619,
+  serialized_start=315,
+  serialized_end=496,
 )
 
 _RAWRFREADING_LOCATION.containing_type = _RAWRFREADING;
-_RAWRFREADING.fields_by_name['sender_location'].message_type = _RAWRFREADING_LOCATION
 _RAWRFREADING.fields_by_name['receiver_location'].message_type = _RAWRFREADING_LOCATION
 _RAWRFREADINGCOLLECTION.fields_by_name['raw_measurement'].message_type = _RAWRFREADING
 DESCRIPTOR.message_types_by_name['RawRFReading'] = _RAWRFREADING

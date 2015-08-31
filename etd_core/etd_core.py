@@ -13,7 +13,8 @@ from functools import update_wrapper
 import json
 import urllib2
 from datetime import timedelta
-import raw_data_pb2
+import message_types.raw_data_pb2
+
 # MongoDB setup
 hostname = 'localhost'
 port_number = 27017
@@ -56,7 +57,7 @@ def crossdomain(origin=None, methods=None, headers=None,
             return resp
 
         f.provide_automatic_options = False
-        return update_wrapper(wrapped_function, f)c
+        return update_wrapper(wrapped_function, f)
     return decorator
 
 app = Flask(__name__)

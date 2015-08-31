@@ -4,7 +4,7 @@
 """changeCollectionName.py: Change the name of a collection in the ETD service."""
 
 __author__ = "Filip Lemic"
-__copyright__ = "Copyright 2015, Telecommunciation Networks Group (TKN), TU Berlin"
+__copyright__ = "Copyright 2015, Telecommunication Networks Group (TKN), TU Berlin"
 
 __version__ = "1.0.0"
 __maintainer__ = "Filip Lemic"

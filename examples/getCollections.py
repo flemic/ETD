@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""getCollections.py: get a list of all collections in a database in the R2DM service."""
+"""getCollections.py: Get a list of all collections in a database in the ETD service."""
 
 __author__ = "Filip Lemic"
-__copyright__ = "Copyright 2015, EVARILOS Project"
+__copyright__ = "Copyright 2015, Telecommunication Networks Group (TKN), TU Berlin"
 
 __version__ = "1.0.0"
 __maintainer__ = "Filip Lemic"

@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""rawRssiScanner.py: Scans the WiFi environment for RSSI values from WiFi beacon packets."""
+"""rawRssiScanner.py: Scan the WiFi environment for RSSI values from WiFi beacon packets."""
 
 __author__ = "Filip Lemic"
-__copyright__ = "Copyright 2015, Telecommunciation Networks Group (TKN), TU Berlin"
+__copyright__ = "Copyright 2015, Telecommunication Networks Group (TKN), TU Berlin"
 
 __version__ = "1.0.0"
 __maintainer__ = "Filip Lemic"

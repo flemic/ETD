@@ -4,7 +4,7 @@
 """wifiFingerprint.py: Generate a fingerprint of the WiFi environment (Linux, Mac OS)."""
 
 __author__ = "Filip Lemic"
-__copyright__ = "Copyright 2015, Telecommunciation Networks Group (TKN), TU Berlin"
+__copyright__ = "Copyright 2015, Telecommunication Networks Group (TKN), TU Berlin"
 
 __version__ = "1.0.0"
 __maintainer__ = "Filip Lemic"
