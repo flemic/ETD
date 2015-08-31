@@ -58,6 +58,10 @@ def crossdomain(origin=None, methods=None, headers=None,
 
 app = Flask(__name__)
 
+# MongoDB setup
+hostname = 'localhost'
+port_number = 27017
+
 #######################################################################################################
 # Home - Hello World! I'm alive!!!!!
 #######################################################################################################
@@ -78,7 +82,7 @@ def databases():
 
     # Connect to the database MongoDB
     try:
-        connection = Connection('localhost', 27017)
+        connection = Connection(hostname, port_number)
     except:
         return json.dumps("Unable to connect to the database!")
       
@@ -100,7 +104,7 @@ def database(db_id):
 
     # Connect to the database MongoDB
     try:
-        connection = Connection('localhost', 27017)
+        connection = Connection(hostname, port_number)
     except:
         return json.dumps("Unable to connect to the database!")
     
@@ -127,7 +131,7 @@ def collection(db_id, coll_id):
 
     # Connect to the database MongoDB
     try:
-        connection = Connection('localhost', 27017)
+        connection = Connection(hostname, port_number)
     except:
         return json.dumps("Unable to connect to the database!")
       
@@ -171,7 +175,7 @@ def message(db_id, coll_id, data_id):
 
     # Connect to the database MongoDB
     try:
-        connection = Connection('localhost', 27017)
+        connection = Connection(hostname, port_number)
     except:
         return json.dumps("Unable to connect to the database!")
       
@@ -222,7 +226,7 @@ def store_message(db_id, coll_id):
     
     # Connect to the database MongoDB
     try:
-        connection = Connection('localhost', 27017)
+        connection = Connection(hostname, port_number)
     except:
         return json.dumps("Unable to connect to the database!")
 
@@ -262,7 +266,7 @@ def create_collection(db_id):
 
     # Connect to the database MongoDB
     try:
-        connection = Connection('localhost', 27017)
+        connection = Connection(hostname, port_number)
     except:
         return json.dumps("Unable to connect to the database!")
 
@@ -294,7 +298,7 @@ def create_database():
 
     # Connect to the database MongoDB
     try:
-        connection = Connection('localhost', 27017)
+        connection = Connection(hostname, port_number)
     except:
         return json.dumps("Unable to connect to the database!")
 
@@ -322,7 +326,7 @@ def delete_database(db_id):
 
     # Connect to the database MongoDB
     try:
-        connection = Connection('localhost', 27017)
+        connection = Connection(hostname, port_number)
     except:
         return json.dumps("Unable to connect to the database!")
 
@@ -348,7 +352,7 @@ def delete_collection(db_id, coll_id):
 
     # Connect to the database MongoDB
     try:
-        connection = Connection('localhost', 27017)
+        connection = Connection(hostname, port_number)
     except:
         return json.dumps("Unable to connect to the database!")
 
@@ -379,7 +383,7 @@ def delete_message(db_id, coll_id, data_id):
 
     # Connect to the database MongoDB
     try:
-        connection = Connection('localhost', 27017)
+        connection = Connection(hostname, port_number)
     except:
         return json.dumps("Unable to connect to the database!")
 
@@ -412,7 +416,7 @@ def replace_message(db_id, coll_id, data_id):
 
     # Connect to the database MongoDB
     try:
-        connection = Connection('localhost', 27017)
+        connection = Connection(hostname, port_number)
     except:
         return json.dumps("Unable to connect to the database!")
 
@@ -483,7 +487,7 @@ def change_message(db_id, coll_id, data_id):
         
     # Connect to the database MongoDB
     try:
-        connection = Connection('localhost', 27017)
+        connection = Connection(hostname, port_number)
     except:
         return json.dumps("Unable to connect to the database!")
 
@@ -533,7 +537,7 @@ def change_collection(db_id, coll_id):
 
     # Connect to the database MongoDB
     try:
-        connection = Connection('localhost', 27017)
+        connection = Connection(hostname, port_number)
     except:
         return json.dumps("Unable to connect to the database!")
 
