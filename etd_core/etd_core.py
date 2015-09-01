@@ -14,6 +14,7 @@ import json
 import urllib2
 from datetime import timedelta
 import raw_data_pb2
+import enriching_functionality as EF
 
 # MongoDB setup
 hostname = 'localhost'
@@ -59,6 +60,45 @@ def crossdomain(origin=None, methods=None, headers=None,
         f.provide_automatic_options = False
         return update_wrapper(wrapped_function, f)
     return decorator
+
+def get_coordinates(db_id,coll_id):
+    """ Given the database and collection IDs, function returns a list of measurment locations 
+    (x,y) coordinates.  
+    """
+
+    # Connect to the database MongoDB
+    try:
+        connection = Connection(hostname, port_number)
+    except:
+        return json.dumps("Unable to connect to the database!")
+      
+
+    db_names = connection.database_names()
+    if db_id in db_names:
+        db = connection[db_id]
+    else:
+        return json.dumps("No such database!")  
+    
+    coll_names = db.collection_names()
+    if coll_id in coll_names:
+        collection = db[coll_id]
+    else:
+        return json.dumps("No such collection in the database!")
+    
+    try:
+        message_collection = collection.find({})
+    except:
+        return json.dumps("Unable to read data from the collection!")
+
+    message_collection_list = {}
+    message_collection_list_full = list(message_collection)
+
+    coordinates = []
+    for i in range(0,len(message_collection_list_full)):
+        coordinates.append((message_collection_list_full[i]['raw_measurement'][0]['receiver_location']['coordinate_x'],message_collection_list_full[i]['raw_measurement'][0]['receiver_location']['coordinate_y']))
+
+    return coordinates
+
 
 app = Flask(__name__)
 
@@ -561,18 +601,21 @@ def change_collection(db_id, coll_id):
 #######################################################################################################
 # Task 14: Enriching functionality 
 #######################################################################################################
-# @app.route('/etd/v1.0/<db_id_original>/<coll_id_original>/<db_id_enriched>/<coll_id_enriched>', methods = ['GET'])
-# @crossdomain(origin='*')
-# def generate_virutal_training_fingerprints(db_id_original, coll_id_original, db_id_enriched, coll_id_enriched):
+@app.route('/etd/v1.0/<db_id_original>/<coll_id_original>/<db_id_enriched>/<coll_id_enriched>', methods = ['GET'])
+@crossdomain(origin='*')
+def generate_virutal_training_fingerprints(db_id_original, coll_id_original, db_id_enriched, coll_id_enriched):
 
-#     parameters = request.data
+    parameters = {}
+    parameters['define_virtual_points'] = 'bla'
 
-#     if parameters['define_virtual_points'] == 'user':
-            
-        
+    coordinates = get_coordinates(db_id_original,coll_id_original)
 
-#     else:
+    if parameters['define_virtual_points'] == 'user':
+        print 'zero'
+    else:
+        points = EF.virtual_point_modified_voronoi(coordinates)
 
+    return json.dumps('done')
 
 #######################################################################################################
 # Additional help functions
