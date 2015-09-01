@@ -320,7 +320,6 @@ def create_database():
 # Task 8: Delete the database [DELETE]
 #######################################################################################################
 @app.route('/etd/v1.0/database/<db_id>', methods = ['DELETE'])
-# @basic_auth.required
 @crossdomain(origin='*')
 def delete_database(db_id):
 
@@ -558,6 +557,22 @@ def change_collection(db_id, coll_id):
     except:
         return json.dumps("Unable to change the name of the collection!")
     return json.dumps("Collection's name changed!")
+
+#######################################################################################################
+# Task 14: Enriching functionality 
+#######################################################################################################
+# @app.route('/etd/v1.0/<db_id_original>/<coll_id_original>/<db_id_enriched>/<coll_id_enriched>', methods = ['GET'])
+# @crossdomain(origin='*')
+# def generate_virutal_training_fingerprints(db_id_original, coll_id_original, db_id_enriched, coll_id_enriched):
+
+#     parameters = request.data
+
+#     if parameters['define_virtual_points'] == 'user':
+            
+        
+
+#     else:
+
 
 #######################################################################################################
 # Additional help functions

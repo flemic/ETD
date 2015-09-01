@@ -98,7 +98,7 @@ This command will generate (if the new message is properly defined) a _raw_data_
 <a name="fingerprints"></a>
 ## Generating and Storing Training Fingerprints
 
-After collecting WiFi RSSI measurements at predefined locations and storing them in the ETD service, the user has to modify and then use the script _generateAndStoreFingerprints.py_ in the directory _help_functions_. The modification of the script has to reflect the intended training fingerprints. The script contains two examples: (1) training fingerprint is a set of averaged RSSI values from each visible WiFi AP at a certain measurement location; (2) training fingerprint is the 4 quantile values for each WiFi AP visible at a certain measurement location.   
+After collecting WiFi RSSI measurements at predefined locations and storing them in the ETD service, the user has to modify and then use the script _generateAndStoreFingerprints.py_ in the directory _help_functions_. The modification of the script has to reflect the intended training fingerprints. The script contains two examples: (1) training fingerprint is a set of averaged RSSI values from each visible WiFi AP at a certain measurement location; (2) training fingerprint is the 4 quantile values from each WiFi AP visible at a certain measurement location.   
 
 <a name="enriched-usage"></a>
 ## Enriching Functionality
