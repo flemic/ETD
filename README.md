@@ -4,7 +4,7 @@ The Enriched Training Database (ETD) a web-based service that enables storage an
 
 ## Table of Contents
 
-- [etd v1.0](#)
+- [ETD v1.0](#)
 	- [Requirements](#setup)
 	- [Installation and Setup](#installation)
 	- [Basic Usage](#basic-usage)
@@ -18,7 +18,7 @@ The Enriched Training Database (ETD) a web-based service that enables storage an
 * <a href="http://flask.pocoo.org/">Flask</a> - a Python micro-framework for creating RESTful web services.
 * <a href="https://www.mongodb.org/">MongoDB</a> - an open-source Not only SQL (NoSQL) database.
 * <a href="https://developers.google.com/protocol-buffers/">Google Protocol Buffers</a> - mechanism for encoding and serializing structured data.
-* Python libraries: <a href="https://api.mongodb.org/python/current/"">PyMongo</a>, <a href="https://docs.python.org/2/library/functools.html">functools</a>, <a href="https://docs.python.org/2/library/json.html">json</a>, <a href="https://docs.python.org/2/library/urllib2.html">urllib2</a>, <a href="https://docs.python.org/2/library/datetime.html">datetime</a>  
+* Python libraries: <a href="https://api.mongodb.org/python/current/"">PyMongo</a>, <a href="https://docs.python.org/2/library/functools.html">functools</a>, <a href="https://docs.python.org/2/library/json.html">json</a>, <a href="https://docs.python.org/2/library/urllib2.html">urllib2</a>, <a href="https://docs.python.org/2/library/datetime.html">datetime</a>. 
 
 <a name="installation"></a>
 ## Installation and Setup
@@ -65,8 +65,8 @@ message RawRFReading {
   optional string sender_id = 1;                 // ID of the sender
   required string sender_bssid = 2;              // BSSID of the sender
   required string channel = 3;                   // Channel
-  required int32 rssi = 4;                       // RSSI (Received Signal Strength)
-  optional int64 timestamp_utc = 5;              // Milliseconds from 1.1.1970. time
+  required int32 rssi = 4;                       // RSSI (Received Signal Strength Indicator)
+  optional int64 timestamp_utc = 5;              // Milliseconds from 1.1.1970.
   required int32 run_nr = 6;                     // Run number
   required Location receiver_location = 7;       // Location of the receiver
 	
@@ -93,13 +93,12 @@ This message can be changed according to the specific needs of a particular user
 ```vim
 protoc -I=$SRC_DIR --python_out=$DST_DIR $SRC_DIR/raw_data.proto
 ```
-This command will generate (if the new message is properly defined) a _raw_data_pb2.py_ file, and this file has to be used for replacing the obsolete version in directories _examples_ and _etd_core_.
+This command will generate (if the new message is properly defined) a _raw_data_pb2.py_ file, and this file has to be used for replacing the obsolete version in directories _examples_, _help_functions_ and _etd_core_.
 
 <a name="fingerprints"></a>
 ## Generating and Storing Training Fingerprints
 
-After collecting WiFi RSSI measurements at predefined locations and storing them in the ETD service, the user has to modify and then use the script _generateAndStoreFingerprints.py_ in the directory _help_functions_.   
-
+After collecting WiFi RSSI measurements at predefined locations and storing them in the ETD service, the user has to modify and then use the script _generateAndStoreFingerprints.py_ in the directory _help_functions_. The modification of the script has to reflect the intended training fingerprints. The script contains two examples: (1) training fingerprint is a set of averaged RSSI values from each visible WiFi AP at a certain measurement location; (2) training fingerprint is the 4 quantile values for each WiFi AP visible at a certain measurement location.   
 
 <a name="enriched-usage"></a>
 ## Enriching Functionality

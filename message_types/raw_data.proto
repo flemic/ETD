@@ -17,7 +17,7 @@ message RawRFReading {
   required string sender_bssid = 2;              // BSSID of the sender
   required string channel = 3;                   // Channel
   required int32 rssi = 4;                       // RSSI (Received Signal Strength)
-  optional int64 timestamp_utc = 5;              // Milliseconds from 1.1.1970. time
+  optional int64 timestamp_utc = 5;              // Milliseconds from 1.1.1970.
   required int32 run_nr = 6;                     // Run number
   required Location receiver_location = 7;       // Location of the receiver
 	

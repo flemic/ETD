@@ -13,7 +13,7 @@ from functools import update_wrapper
 import json
 import urllib2
 from datetime import timedelta
-import message_types.raw_data_pb2
+import raw_data_pb2
 
 # MongoDB setup
 hostname = 'localhost'
@@ -161,7 +161,6 @@ def collection(db_id, coll_id):
         message_collection_list[i] = {}
         message_collection_list[i]['_id'] = str(message_collection_list_full[i]['_id'])
         message_collection_list[i]['data_id'] = message_collection_list_full[i]['data_id']
-        message_collection_list[i]['metadata_id'] = message_collection_list_full[i]['metadata_id']
         message_collection_list[i]['URI'] = url_for("message", db_id = db_id, coll_id = coll_id, data_id = message_collection_list_full[i]['data_id'], _external = True)
 
     return json.dumps(message_collection_list)
