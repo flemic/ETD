@@ -18,12 +18,12 @@
 * <a href="http://flask.pocoo.org/">Flask</a> - a Python micro-framework for creating RESTful web services.
 * <a href="https://www.mongodb.org/">MongoDB</a> - an open-source Not only SQL (NoSQL) database.
 * <a href="https://developers.google.com/protocol-buffers/">Google Protocol Buffers</a> - mechanism for encoding and serializing structured data.
-* Python libraries: <a href="https://api.mongodb.org/python/current/"scipy>PyMongo</a>, <a href="https://docs.python.org/2/library/functools.html">functools</a>, <a href="https://docs.python.org/2/library/json.html">json</a>, <a href="https://docs.python.org/2/library/urllib2.html">urllib2</a>, <a href="https://docs.python.org/2/library/datetime.html">datetime</a>, <a href="http://www.numpy.org/">NumPy</a>, <a href="http://www.scipy.org/">SciPy</a> 
+* Python libraries: <a href="https://api.mongodb.org/python/current/"scipy>PyMongo</a>, <a href="https://docs.python.org/2/library/functools.html">functools</a>, <a href="https://docs.python.org/2/library/json.html">json</a>, <a href="https://docs.python.org/2/library/urllib2.html">urllib2</a>, <a href="https://docs.python.org/2/library/datetime.html">datetime</a>, <a href="http://www.numpy.org/">NumPy</a>, <a href="http://www.scipy.org/">SciPy</a>. 
 
 <a name="installation"></a>
 ## Installation and Setup
 
-* Start a MongoDB service on a defined port number (default port number is 27017) and provide the path to a folder where data is to be stored.
+* Start a MongoDB service on a defined port number (default port number is 27017) and provide the path to a folder where data is to be stored:
 
  ```vim
  sudo mongod --dbpath <path_to_data> --port <port_num> 
@@ -53,7 +53,6 @@ A set of Python scripts that allows basic data management in the ETD service is 
 * Delete message: _deleteMessage.py_
 * Delete collection: _deleteCollection.py_
 * Delete database: _deleteDatabase.py_
-
 
 <a name="raw_data"></a>
 ## Raw Data Format

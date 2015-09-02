@@ -615,7 +615,7 @@ def generate_virutal_training_fingerprints(db_id_original, coll_id_original, db_
     else:
         points = EF.virtual_point_modified_voronoi(coordinates)
 
-    return json.dumps('done')
+    return json.dumps(points)
 
 #######################################################################################################
 # Additional help functions

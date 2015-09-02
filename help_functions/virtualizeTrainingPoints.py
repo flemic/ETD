@@ -14,15 +14,17 @@ __status__ = "Development"
 
 import urllib2
 import json
+from scipy.spatial import voronoi_plot_2d
+import matplotlib.pyplot as plt
 
 # The URL where server listens
 apiURL = 'http://localhost:5000/'
 
 # ID of the database where original training fingerprints are stored
-db_id_training = 'db_id_training'
+db_id_training = 'wifi_beacon_rssi_twist_small_macbook'
 
 # ID of the collection in the database original training fingerprints are stored
-coll_id_training = 'coll_id_training'
+coll_id_training = 'training_quantile'
 
 # ID of the database where original and virtual training fingerprints should be stored
 db_id_enriched = 'db_id_enriched'
@@ -36,4 +38,8 @@ parameters['generate_virtual_fingerprints'] = 'IDWI' # IDWI or Multi-wall
 
 req = urllib2.Request(apiURL + 'etd/v1.0/' + db_id_training  + '/' + coll_id_training + '/' + db_id_enriched + '/' + coll_id_enriched, headers={"Content-Type": "application/json"})
 resp = urllib2.urlopen(req)
-print json.loads(resp.read())
+
+coordinates = json.loads(resp.read())
+
+plt.scatter(*zip(*coordinates))
+plt.show()
