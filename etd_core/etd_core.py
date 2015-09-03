@@ -591,6 +591,32 @@ def generate_virutal_training_fingerprints(db_id_original, coll_id_original, db_
 
     parameters = json.loads(request.data)
 
+    # Connect to the database MongoDB
+    try:
+        connection = Connection(hostname, port_number)
+    except:
+        return json.dumps("Unable to connect to the database!")
+      
+
+    db_names = connection.database_names()
+    if db_id_original in db_names:
+        db1 = connection[db_id_original]
+    else:
+        return json.dumps("Database" + db_id_original + "doesn't exist!")
+    
+    if db_id_enriched in db_names:
+        db2 = connection[db_id_enriched]
+    else:
+        return json.dumps("Database" + db_id_enriched + "doesn't exist!")      
+    
+    coll_names = db1.collection_names()
+    if coll_id_original not in coll_names:
+        return json.dumps("Collection" + Coll_id_original + "doesn't exist!")
+        
+    coll_names = db2.collection_names()
+    if coll_id_enriched not in coll_names:
+        return json.dumps("Collection" + coll_id_enriched + "doesn't exist!")
+
     coordinates,rssis = get_coordinates_rssi(db_id_original, coll_id_original, parameters['transmitters'])
 
     if parameters['define_virtual_points'] == 'User':
