@@ -16,6 +16,7 @@ import urllib2
 import json
 from scipy.spatial import voronoi_plot_2d
 import matplotlib.pyplot as plt
+from generateURL import RequestWithMethod
 
 # The URL where server listens
 apiURL = 'http://localhost:5000/'
@@ -34,9 +35,10 @@ coll_id_enriched = 'coll_id_enriched'
 
 parameters= {}
 parameters['define_virtual_points'] = 'Voronoi' # User or Voronoi
-parameters['generate_virtual_fingerprints'] = 'IDWI' # IDWI or Multi-wall
+parameters['propagation_model'] = 'IDWI'        # IDWI or Multiwall
+parameters['transmitters'] = ['64:70:02:3e:aa:ef','64:70:02:3e:9f:63','64:70:02:3e:aa:11','64:70:02:3e:aa:d9']
 
-req = urllib2.Request(apiURL + 'etd/v1.0/' + db_id_training  + '/' + coll_id_training + '/' + db_id_enriched + '/' + coll_id_enriched, headers={"Content-Type": "application/json"})
+req = RequestWithMethod(apiURL + 'etd/v1.0/' + db_id_training  + '/' + coll_id_training + '/' + db_id_enriched + '/' + coll_id_enriched,'GET', headers={"Content-Type": "application/json"}, data=json.dumps(parameters))
 resp = urllib2.urlopen(req)
 
 coordinates = json.loads(resp.read())

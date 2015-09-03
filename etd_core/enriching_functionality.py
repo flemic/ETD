@@ -25,6 +25,9 @@ import matplotlib.pyplot as plt
 # The URL where server listens
 apiURL = 'http://localhost:5000/'
 
+def virtual_point_user(coordinates):
+    pass
+
 def virtual_point_modified_voronoi(coordinates):
     """Define locations of virtual training points based on modified Voronoi diagrams"""
 
@@ -80,7 +83,6 @@ def virtual_point_modified_voronoi(coordinates):
     to_delete_clean = []
     [to_delete_clean.append(x) for x in to_delete if x not in to_delete_clean]
 
-    print to_delete_clean
     for offset, index in enumerate(sorted(to_delete_clean)):
         index -= offset
         del vertices[index]
@@ -88,7 +90,7 @@ def virtual_point_modified_voronoi(coordinates):
     return vertices + to_add
 
 def knn_avg_dist(coordinates):
-    """Calculates for points in rows of X, the average distance of each, to their k-nearest neighbours"""
+    """Calculates for points in rows of X, the average distance of each, to their k-nearest neighbors"""
 
     kdt = scipy.spatial.cKDTree(coordinates) 
     k = 4 # number of nearest neighbors 
@@ -117,9 +119,70 @@ def min_max_x_y(coordinates):
 
     return (min_x,max_x,min_y,max_y)
 
+def generate_virtual_fingerprints_idwi(coordinates,rssis,points,transmitters):
+    """Propagation modeling based on Inverse Distance Weighted Interpolation"""
+
+    x = []
+    y = []
+    xi = []
+    yi = []
+
+    for i in coordinates:
+        x.append(i[0])
+        y.append(i[1])
+
+    for i in points:
+        xi.append(i[0])
+        yi.append(i[1])
+
+    dist = distance_matrix(x, y, xi, yi)
+
+    # In IDW, weights are 1 / distance
+    weights = 1.0 / dist
+
+    # Make weights sum to one
+    weights /= weights.sum(axis=0)
+
+    max_elements = 0
+    for point in rssis:
+        for transmitter in point.keys():
+            if len(point[transmitter]) > max_elements:
+                max_elements = len(point[transmitter])
+
+    virtual_fingerprints = {}
+    # For each BSSID
+    for transmitter in transmitters:
+        virtual_fingerprints[transmitter] = {}
+        # For each meas number 
+        for i in range(0,max_elements):
+            z = []
+            # For each point
+            for point in rssis:
+                try:
+                    z.append(point[transmitter][i])
+                except:
+                    z.append(-90)
+            
+            # Multiply the weights for each interpolated point by all observed Z-values
+            virtual_fingerprints[transmitter][i] = np.dot(weights.T, z) # Interpolated values for one measurement, one transmitter and all virtual points
+            
+    return virtual_fingerprints
+
+def distance_matrix(x0, y0, x1, y1):
+    """Provides a distance matrix between all locations"""
+
+    obs = np.vstack((x0, y0)).T
+    interp = np.vstack((x1, y1)).T
+
+    d0 = np.subtract.outer(obs[:,0], interp[:,0])
+    d1 = np.subtract.outer(obs[:,1], interp[:,1])
+
+    return np.hypot(d0, d1)
+
 # Enabling DELETE, PUT, etc.
 class RequestWithMethod(urllib2.Request):
     """Workaround for using DELETE with urllib2"""
+
     def __init__(self, url, method, data=None, headers={}, origin_req_host=None, unverifiable=False):
         self._method = method
         urllib2.Request.__init__(self, url, data, headers, origin_req_host, unverifiable)

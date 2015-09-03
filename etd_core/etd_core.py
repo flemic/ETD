@@ -15,6 +15,7 @@ import urllib2
 from datetime import timedelta
 import raw_data_pb2
 import enriching_functionality as EF
+import pprint
 
 # MongoDB setup
 hostname = 'localhost'
@@ -61,9 +62,9 @@ def crossdomain(origin=None, methods=None, headers=None,
         return update_wrapper(wrapped_function, f)
     return decorator
 
-def get_coordinates(db_id,coll_id):
+def get_coordinates_rssi(db_id,coll_id,transmitters):
     """ Given the database and collection IDs, function returns a list of measurment locations 
-    (x,y) coordinates.  
+    (x,y) coordinates and the related RSSI measurments.  
     """
 
     # Connect to the database MongoDB
@@ -94,14 +95,26 @@ def get_coordinates(db_id,coll_id):
     message_collection_list_full = list(message_collection)
 
     coordinates = []
+    rssis = []
     for i in range(0,len(message_collection_list_full)):
+        rssi_transmitter = {}
         coordinates.append((message_collection_list_full[i]['raw_measurement'][0]['receiver_location']['coordinate_x'],message_collection_list_full[i]['raw_measurement'][0]['receiver_location']['coordinate_y']))
+        for meas in message_collection_list_full[i]['raw_measurement']:
+            if meas['sender_bssid'] in transmitters:
+                try:
+                    rssi_transmitter[meas['sender_bssid']].append(meas['rssi'])
+                except:
+                    rssi_transmitter[meas['sender_bssid']] = []
+                    rssi_transmitter[meas['sender_bssid']].append(meas['rssi'])
+        rssis.append(rssi_transmitter)
 
-    return coordinates
+    return coordinates,rssis
+
+def store_virtual_fingerprints(db_id_original, coll_id_original, db_id_enriched, coll_id_enriched, points, virtual_fingerprints):
+    pass
 
 
 app = Flask(__name__)
-
 
 #######################################################################################################
 # Home - Hello World! I'm alive!!!!!
@@ -235,7 +248,6 @@ def message(db_id, coll_id, data_id):
     if request.data == 'protobuf':
         try:
             pb_message = protobuf_json.json2pb(raw_data_pb2.RawRFReadingCollection(), message_collection)
-            pb_message = protobuf_json.json2pb(raw_metadata_pb2.Metadata(), message_collection)
         except:
             return json.dumps("Unable to read message from the collection!")
         pb_message_string = pb_message.SerializeToString()
@@ -251,18 +263,11 @@ def message(db_id, coll_id, data_id):
 @crossdomain(origin='*')
 def store_message(db_id, coll_id):
 
-    detect_message = 0
     try:
         raw_data_collection = raw_data_pb2.RawRFReadingCollection()
         raw_data_collection.ParseFromString(request.data)
-        detect_message = 1
     except:
-        try:
-            raw_metadata = raw_metadata_pb2.Metadata()
-            raw_metadata.ParseFromString(request.data)
-            detect_message = 2
-        except:
-            return json.dumps('Message is not well formated!')
+        return json.dumps('Message is not well formated!')
     
     # Connect to the database MongoDB
     try:
@@ -282,16 +287,10 @@ def store_message(db_id, coll_id):
     else:
         return json.dumps("No such collection in the database!")
     
-    if detect_message == 1:
-        try:
-            collection.insert(protobuf_json.pb2json(raw_data_collection))
-        except:
-            return json.dumps("Unable to store data into the database!")
-    else :
-        try:
-            collection.insert(protobuf_json.pb2json(raw_metadata))
-        except:
-            return json.dumps("Unable to store data into the database!")
+    try:
+        collection.insert(protobuf_json.pb2json(raw_data_collection))
+    except:
+        return json.dumps("Unable to store data into the database!")
 
     return json.dumps('Data stored!')
 
@@ -459,16 +458,10 @@ def replace_message(db_id, coll_id, data_id):
     except:
         return json.dumps("Unable to connect to the database!")
 
-    detect_message = 0
     try:
         raw_data_collection.ParseFromString(request.data)
-        detect_message = 1
     except:
-        try:
-            raw_metadata.ParseFromString(request.data)
-            detect_message = 2
-        except:
-            return json.dumps('Message is not well defined!')
+        return json.dumps('Message is not well defined!')
     
     db_names = connection.database_names()
     if db_id not in db_names:
@@ -486,7 +479,6 @@ def replace_message(db_id, coll_id, data_id):
     except:
         return json.dumps("Unable to read data from the collection!")
     
-
     if message_collection is None:
         return json.dumps("No data with this ID in the collection!")
 
@@ -499,18 +491,11 @@ def replace_message(db_id, coll_id, data_id):
         collection.insert(message_backup)
         return json.dumps("Unable to read data from the database!")
 
-    if detect_message == 1:
-        try:
-            collection.insert(protobuf_json.pb2json(raw_data_collection))
-        except:
-            collection.insert(message_backup)
-            return json.dumps("Unable to store data into the collection!")
-    else:
-        try:
-            collection.insert(protobuf_json.pb2json(raw_metadata))
-        except:
-            collection.insert(message_backup)
-            return json.dumps("Unable to store data into the collection!")
+    try:
+        collection.insert(protobuf_json.pb2json(raw_data_collection))
+    except:
+        collection.insert(message_backup)
+        return json.dumps("Unable to store data into the collection!")
 
     return json.dumps('Message successfully replaced!')
 
@@ -561,7 +546,6 @@ def change_message(db_id, coll_id, data_id):
         collection.insert(message_backup)
         return json.dumps("Unable to store data into the database!")
 
-
     return json.dumps('Message successfully replaced!')
 
 
@@ -605,15 +589,26 @@ def change_collection(db_id, coll_id):
 @crossdomain(origin='*')
 def generate_virutal_training_fingerprints(db_id_original, coll_id_original, db_id_enriched, coll_id_enriched):
 
-    parameters = {}
-    parameters['define_virtual_points'] = 'bla'
+    parameters = json.loads(request.data)
 
-    coordinates = get_coordinates(db_id_original,coll_id_original)
+    coordinates,rssis = get_coordinates_rssi(db_id_original, coll_id_original, parameters['transmitters'])
 
-    if parameters['define_virtual_points'] == 'user':
-        print 'zero'
-    else:
+    if parameters['define_virtual_points'] == 'User':
+        points = EF.virtual_point_user()
+    elif parameters['define_virtual_points'] == 'Voronoi':
         points = EF.virtual_point_modified_voronoi(coordinates)
+    else:
+        return json.dumps('Unknown method for the definition of virtual training points')
+
+    if parameters['propagation_model'] == 'IDWI':
+        virtual_fingerprints = EF.generate_virtual_fingerprints_idwi(coordinates, rssis, points, parameters['transmitters'])
+        reply = store_virtual_fingerprints(db_id_original, coll_id_original, db_id_enriched, coll_id_enriched, points, virtual_fingerprints)
+        return json.dumps(reply)
+
+    elif parameters['propagation_model'] == 'IDWI':
+        pass
+    else:
+        return "Unknown method for the generation of virtual training fingerprints"
 
     return json.dumps(points)
 
