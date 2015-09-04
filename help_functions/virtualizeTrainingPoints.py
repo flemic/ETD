@@ -42,7 +42,6 @@ parameters['transmitters'] = ['64:70:02:3e:aa:ef','64:70:02:3e:9f:63','64:70:02:
 req = RequestWithMethod(apiURL + 'etd/v1.0/' + db_id_training  + '/' + coll_id_training + '/' + db_id_enriched + '/' + coll_id_enriched,'GET', headers={"Content-Type": "application/json"}, data=json.dumps(parameters))
 resp = urllib2.urlopen(req)
 response = json.loads(resp.read())
-
 print response
 
 

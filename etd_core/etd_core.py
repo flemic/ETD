@@ -160,7 +160,6 @@ def store_virtual_fingerprints(db_id_original, coll_id_original, db_id_enriched,
 
     data_id_virtual = len(message_collection_list_full) + 1
 
-    print virtual_fingerprints.keys()
     iteration = 0
     for point in points:
         raw_data_collection = raw_data_pb2.RawRFReadingCollection()
@@ -699,7 +698,6 @@ def generate_virutal_training_fingerprints(db_id_original, coll_id_original, db_
 
     if parameters['propagation_model'] == 'IDWI':
         virtual_fingerprints = EF.generate_virtual_fingerprints_idwi(coordinates, rssis, points, parameters['transmitters'])
-        print virtual_fingerprints
         reply = store_virtual_fingerprints(db_id_original, coll_id_original, db_id_enriched, coll_id_enriched, points, virtual_fingerprints)
         return json.dumps(reply)
 
@@ -710,7 +708,7 @@ def generate_virutal_training_fingerprints(db_id_original, coll_id_original, db_
 
     return json.dumps("Something is wrong!")
 
-    
+
 #######################################################################################################
 # Additional help functions
 #######################################################################################################
