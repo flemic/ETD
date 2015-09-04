@@ -123,18 +123,18 @@ Generation of virtual training fingerprints can be performed with the script _vi
 ## Implementation of New Virtual Points Definition Methods
 The design of the ETD allows implementation of new methods for the definition of virtual training points. In order to implement a new method for virtual training points definition, the user firstly has to add this option in the _etd_core.py_ script (line 692). This code segment:
 
-'''vim
+```vim
   if parameters['define_virtual_points'] == 'User':
       points = EF.virtual_point_user()
   elif parameters['define_virtual_points'] == 'Voronoi':
       points = EF.virtual_point_modified_voronoi(coordinates)
   else:
       return json.dumps('Unknown method for the definition of virtual training points')
-'''  
+```  
 
 has to be replaced with the following:
 
-'''vim
+```vim
   if parameters['define_virtual_points'] == 'User':
       points = EF.virtual_point_user()
   elif parameters['define_virtual_points'] == 'Voronoi':
@@ -143,13 +143,13 @@ has to be replaced with the following:
       points = EF.virtual_point_'new_method'()
   else:
       return json.dumps('Unknown method for the definition of virtual training points')
-'''  
+``` 
 
 For the generation of virtual training points the user may require the locations of original training points. These locations are provided in the variable _coordinates_ in the following format:
 
-'''vim
+```vim
 list[tuple_point_0(coordinate_x,coordinate_y),...,tuple_point_N(coordinate_x,coordinate_y)]
-'''
+```
 
 The user is then able to implement a new function for defining virtual training points. The required output is the same as for the original set of points shown above  - list of tuples.
 
