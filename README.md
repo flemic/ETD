@@ -41,7 +41,7 @@
 
 <a name="general_idea"></a>
 ## Envisioned Usage Concept
-![alt tag](https://github.com/flemic/ETD/master/general_idea.png)
+![alt tag](https://github.com/flemic/ETD/blob/master/general_idea.png)
 
 <a name="basic-usage"></a>
 ## Basic Usage
