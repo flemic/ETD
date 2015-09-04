@@ -22,10 +22,10 @@ from generateURL import RequestWithMethod
 apiURL = 'http://localhost:5000/'
 
 # ID of the database where original training fingerprints are stored
-db_id_training = 'wifi_beacon_rssi_twist_small_macbook'
+db_id_training = 'db_id_training'
 
 # ID of the collection in the database original training fingerprints are stored
-coll_id_training = 'training_quantile'
+coll_id_training = 'coll_id_training'
 
 # ID of the database where original and virtual training fingerprints should be stored
 db_id_enriched = 'db_id_enriched'
@@ -36,12 +36,13 @@ coll_id_enriched = 'coll_id_enriched'
 parameters= {}
 parameters['define_virtual_points'] = 'Voronoi' # User or Voronoi
 parameters['propagation_model'] = 'IDWI'        # IDWI or Multiwall
+# Define WiFi APs (BSSIDs) that you want to use in the propagation modeling. 
 parameters['transmitters'] = ['64:70:02:3e:aa:ef','64:70:02:3e:9f:63','64:70:02:3e:aa:11','64:70:02:3e:aa:d9']
 
 req = RequestWithMethod(apiURL + 'etd/v1.0/' + db_id_training  + '/' + coll_id_training + '/' + db_id_enriched + '/' + coll_id_enriched,'GET', headers={"Content-Type": "application/json"}, data=json.dumps(parameters))
 resp = urllib2.urlopen(req)
+response = json.loads(resp.read())
 
-coordinates = json.loads(resp.read())
+print response
 
-plt.scatter(*zip(*coordinates))
-plt.show()
+

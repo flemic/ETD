@@ -152,7 +152,6 @@ def generate_virtual_fingerprints_idwi(coordinates,rssis,points,transmitters):
     virtual_fingerprints = {}
     # For each BSSID
     for transmitter in transmitters:
-        virtual_fingerprints[transmitter] = {}
         # For each meas number 
         for i in range(0,max_elements):
             z = []
@@ -164,8 +163,22 @@ def generate_virtual_fingerprints_idwi(coordinates,rssis,points,transmitters):
                     z.append(-90)
             
             # Multiply the weights for each interpolated point by all observed Z-values
-            virtual_fingerprints[transmitter][i] = np.dot(weights.T, z) # Interpolated values for one measurement, one transmitter and all virtual points
+            zi = np.dot(weights.T, z) # Interpolated values for one measurement, one transmitter and all virtual points
             
+            iterate = -1
+            for i in zi:
+                iterate += 1
+                try:
+                    virtual_fingerprints[iterate][transmitter].append(i)
+                except:
+                    try:
+                        virtual_fingerprints[iterate][transmitter] = []
+                        virtual_fingerprints[iterate][transmitter].append(i)
+                    except:
+                        virtual_fingerprints[iterate] = {}
+                        virtual_fingerprints[iterate][transmitter] = []
+                        virtual_fingerprints[iterate][transmitter].append(i)
+
     return virtual_fingerprints
 
 def distance_matrix(x0, y0, x1, y1):

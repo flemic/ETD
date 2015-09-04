@@ -12,10 +12,11 @@ from functools import wraps
 from functools import update_wrapper
 import json
 import urllib2
-from datetime import timedelta
+from datetime import timedelta, datetime
 import raw_data_pb2
 import enriching_functionality as EF
 import pprint
+import time
 
 # MongoDB setup
 hostname = 'localhost'
@@ -110,12 +111,8 @@ def get_coordinates_rssi(db_id,coll_id,transmitters):
 
     return coordinates,rssis
 
-
-
-
-
-
 def store_virtual_fingerprints(db_id_original, coll_id_original, db_id_enriched, coll_id_enriched, points, virtual_fingerprints):
+    """Store original and virtaul training fingerprint in the same database"""
 
     # Connect to the database MongoDB
     try:
@@ -143,8 +140,6 @@ def store_virtual_fingerprints(db_id_original, coll_id_original, db_id_enriched,
     message_collection_list = {}
     message_collection_list_full = list(message_collection)
 
-    raw_data_collection = raw_data_pb2.RawRFReadingCollection()
-
     if db_id_enriched in db_names:
         db = connection[db_id_enriched]
     else:
@@ -158,17 +153,38 @@ def store_virtual_fingerprints(db_id_original, coll_id_original, db_id_enriched,
     
     for i in range(0,len(message_collection_list_full)):
         try:
-            collection.insert(protobuf_json.pb2json(message_collection_list_full[i]))
+            del message_collection_list_full[i]['_id']
+            collection.insert(message_collection_list_full[i])
         except:
             return json.dumps("Unable to store data into the database!")
 
+    data_id_virtual = len(message_collection_list_full) + 1
+
+    print virtual_fingerprints.keys()
+    iteration = 0
+    for point in points:
+        raw_data_collection = raw_data_pb2.RawRFReadingCollection()
+        raw_data_collection.data_id = str(data_id_virtual)
+        data_id_virtual += 1
+        raw_data_collection.meas_number = message_collection_list_full[0]['meas_number']
+        for key in virtual_fingerprints[iteration].keys():
+            for num in range(0,len(virtual_fingerprints[iteration][key])):
+                raw_data_reading = raw_data_collection.raw_measurement.add()
+                x = datetime.utcnow()
+                raw_data_reading.timestamp_utc = timestamp_utc = int(time.mktime(x.timetuple()))
+                raw_data_reading.receiver_location.coordinate_x = point[0]
+                raw_data_reading.receiver_location.coordinate_y = point[1]
+                raw_data_reading.run_nr = num + 1
+                raw_data_reading.sender_bssid = key
+                raw_data_reading.rssi = float(virtual_fingerprints[iteration][key][num])
+        iteration += 1
+        try:
+            collection.insert(protobuf_json.pb2json(raw_data_collection))
+        except:
+            collection.insert(message_backup)
+            return json.dumps("Unable to store data into the collection!")
+
     return json.dumps('Data stored!')
-
-
-
-
-
-
 
 app = Flask(__name__)
 
@@ -653,7 +669,6 @@ def generate_virutal_training_fingerprints(db_id_original, coll_id_original, db_
     except:
         return json.dumps("Unable to connect to the database!")
       
-
     db_names = connection.database_names()
     if db_id_original in db_names:
         db1 = connection[db_id_original]
@@ -684,6 +699,7 @@ def generate_virutal_training_fingerprints(db_id_original, coll_id_original, db_
 
     if parameters['propagation_model'] == 'IDWI':
         virtual_fingerprints = EF.generate_virtual_fingerprints_idwi(coordinates, rssis, points, parameters['transmitters'])
+        print virtual_fingerprints
         reply = store_virtual_fingerprints(db_id_original, coll_id_original, db_id_enriched, coll_id_enriched, points, virtual_fingerprints)
         return json.dumps(reply)
 
@@ -692,8 +708,9 @@ def generate_virutal_training_fingerprints(db_id_original, coll_id_original, db_
     else:
         return "Unknown method for the generation of virtual training fingerprints"
 
-    return json.dumps(points)
+    return json.dumps("Something is wrong!")
 
+    
 #######################################################################################################
 # Additional help functions
 #######################################################################################################
