@@ -108,10 +108,10 @@ This command will generate (if the new message is properly defined) a _raw_data_
 Generation of virtual training fingerprints can be performed with the script _virtualizeTrainingFingerprints.py_ in folder _help_functions_. In the script, one has to set the desired parameters: 
 
 * Database/collection that contains original training fingerprints; 
-* Enriched database/collection in which original and generated virtual training fingerprints are to be stored;
+* Enriched database/collection in which original and generated virtual fingerprints are to be stored;
 * Virtual training points definition method (at the moment User or modified Voronoi based);
 * Propagation model (at the moment IDWI and Multi-wall);
-* BSSIDs of WiFI APs whose RSSIs are to be modeled in the defined virtual training points.
+* BSSIDs of WiFI APs whose RSSIs are to be modeled in the defined virtual training points;
 
 <a name="virutal_training_points"></a>
 ## Implementation of New Virtual Training Points Definition Methods
