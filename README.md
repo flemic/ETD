@@ -114,10 +114,10 @@ Generation of virtual training fingerprints can be performed with the script _vi
 * BSSIDs of WiFI APs whose RSSIs are to be modeled in the defined virtual training points;
 
 <a name="virutal_training_points"></a>
-## Implementation of New Virtual Training Points Definition Methods
+## Implementation of New Virtual Points Definition Methods
 
 <a name="propagation_model"></a>
 ## Implementation of New Propagation Models
 
 <a name="multiwall"></a>
-## Accommodation of Multi-Wall model for New Environments
+## Accommodation of the Multi-Wall model for New Environments
