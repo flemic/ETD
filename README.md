@@ -11,9 +11,9 @@
 	- [Raw Data Format](#raw_data)
 	- [Generating and Storing Training Fingerprints](#fingerprints)
 	- [Enriching Functionality](#enriched-usage)
-  - [Implementation of New Virtual Training Points Definition Methods](#virutal_training_points)
+  - [Implementation of New Virtual Points Definition Methods](#virutal_training_points)
   - [Implementation of New Propagation Models](#propagation_model)
-  - [Accommodation of Multi-Wall model for New Environments](#multiwall)
+  - [Multi-Wall model in New Environments](#multiwall)
 
 <a name="setup"></a>
 ## Requirements
@@ -120,4 +120,4 @@ Generation of virtual training fingerprints can be performed with the script _vi
 ## Implementation of New Propagation Models
 
 <a name="multiwall"></a>
-## Accommodation of the Multi-Wall model for New Environments
+## Multi-Wall model in New Environments
