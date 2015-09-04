@@ -5,13 +5,13 @@
 ## Table of Contents
 
 - [ETD v1.0](#)
-	- [Requirements](#setup)
-	- [Installation and Setup](#installation)
+  - [Requirements](#setup)
+  - [Installation and Setup](#installation)
   - [Envisioned Usage Concept](#general_idea)
-	- [Basic Usage](#basic-usage)
-	- [Raw Data Format](#raw_data)
-	- [Generating and Storing Training Fingerprints](#fingerprints)
-	- [Enriching Functionality](#enriched-usage)
+  - [Basic Usage](#basic-usage)
+  - [Raw Data Format](#raw_data)
+  - [Generating and Storing Training Fingerprints](#fingerprints)
+  - [Enriching Functionality](#enriched-usage)
   - [Implementation of New Virtual Points Definition Methods](#virutal_training_points)
   - [Implementation of New Propagation Models](#propagation_model)
   - [Multi-Wall Model in New Environments](#multiwall)
@@ -42,6 +42,7 @@
 <a name="general_idea"></a>
 ## Envisioned Usage Concept
 ![alt tag](https://github.com/flemic/ETD/blob/master/general_idea.png)
+
 
 <a name="basic-usage"></a>
 ## Basic Usage
