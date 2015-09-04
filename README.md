@@ -96,7 +96,7 @@ message RawRFReadingCollection {
 }
 ```
 
-<div class="align-justify">This message can be changed according to the specific needs of a particular user. However, the required parameters have to be in included in the message format and values have to be given to them during the training survey measurement campaign. In case the message format is changed, a new translation of a Protocol Buffer structure to Python has to be performed:</div>
+This message can be changed according to the specific needs of a particular user. However, the required parameters have to be in included in the message format and values have to be given to them during the training survey measurement campaign. In case the message format is changed, a new translation of a Protocol Buffer structure to Python has to be performed:
 
 ```vim
 protoc -I=$SRC_DIR --python_out=$DST_DIR $SRC_DIR/raw_data.proto
@@ -106,7 +106,7 @@ This command will generate (if the new message is properly defined) a _raw_data_
 <a name="fingerprints"></a>
 ## Generating and Storing Training Fingerprints
 
-<div class="align-justify">After collecting WiFi RSSI measurements at predefined locations and storing them in the ETD service, the user has to modify and then use the script _generateAndStoreFingerprints.py_ in the directory _help_functions_. The modification of the script has to reflect the intended training fingerprints. The script contains two examples: (1) training fingerprint is a set of averaged RSSI values from each visible WiFi AP at a certain measurement location; (2) training fingerprint is the 4 quantile values from each WiFi AP visible at a certain measurement location.</div>   
+After collecting WiFi RSSI measurements at predefined locations and storing them in the ETD service, the user has to modify and then use the script _generateAndStoreFingerprints.py_ in the directory _help_functions_. The modification of the script has to reflect the intended training fingerprints. The script contains two examples: (1) training fingerprint is a set of averaged RSSI values from each visible WiFi AP at a certain measurement location; (2) training fingerprint is the 4 quantile values from each WiFi AP visible at a certain measurement location.  
 
 <a name="enriched-usage"></a>
 ## Enriching Functionality
@@ -151,7 +151,7 @@ For the generation of virtual training points the user may require the locations
 list[tuple_point_0(coordinate_x,coordinate_y),...,tuple_point_N(coordinate_x,coordinate_y)]
 ```
 
-The user is then able to implement a new function for defining virtual training points. The required output is the same as for the original set of points shown above  - list of tuples.
+The user should then be able to implement a new function for defining virtual training points (_virtual_point_'new_method'()_). The required output is the same as for the original set of points shown above  - list of tuples.
 
 <a name="propagation_model"></a>
 ## Implementation of New Propagation Models
