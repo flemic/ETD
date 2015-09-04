@@ -111,7 +111,7 @@ After collecting WiFi RSSI measurements at predefined locations and storing them
 <a name="enriched-usage"></a>
 ## Enriching Functionality
 
-Generation of virtual training fingerprints can be performed with the script _virtualizeTrainingFingerprints.py_ in folder _help_functions_. In the script, one has to set the desired parameters: 
+Generation of virtual training fingerprints can be done using the script _virtualizeTrainingFingerprints.py_ in folder _help_functions_. In the script, one has to set the desired parameters: 
 
 * Database/collection that contains original training fingerprints; 
 * Enriched database/collection in which original and generated virtual fingerprints are to be stored;
