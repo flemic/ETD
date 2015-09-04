@@ -7,6 +7,7 @@
 - [ETD v1.0](#)
 	- [Requirements](#setup)
 	- [Installation and Setup](#installation)
+  - [Envisioned Usage Concept](#general_idea)
 	- [Basic Usage](#basic-usage)
 	- [Raw Data Format](#raw_data)
 	- [Generating and Storing Training Fingerprints](#fingerprints)
@@ -37,6 +38,10 @@
  ```vim
  python etd_core.py 
  ```
+
+<a name="general_idea"></a>
+## Envisioned Usage Concept
+![alt tag](https://github.com/flemic/ETD/master/general_idea.png)
 
 <a name="basic-usage"></a>
 ## Basic Usage
@@ -109,8 +114,8 @@ Generation of virtual training fingerprints can be performed with the script _vi
 
 * Database/collection that contains original training fingerprints; 
 * Enriched database/collection in which original and generated virtual fingerprints are to be stored;
-* Virtual training points definition method (at the moment User or modified Voronoi based);
-* Propagation model (at the moment IDWI and Multi-wall);
+* Virtual training points definition method (at the moment: User or modified Voronoi based);
+* Propagation model (at the moment: IDWI and Multi-wall);
 * BSSIDs of WiFI APs whose RSSIs are to be modeled in the defined virtual training points;
 
 <a name="virutal_training_points"></a>
