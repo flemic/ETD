@@ -151,7 +151,7 @@ For the generation of virtual training points the user may require the locations
 list[tuple_point_0(coordinate_x,coordinate_y),...,tuple_point_N(coordinate_x,coordinate_y)]
 ```
 
-The user should then be able to implement a new function for defining virtual training points (`virtual_point_'new_method'()`). The required output is the same as for the original set of points shown above  - list of tuples.
+The user should then be able to implement a new method `virtual_point_'new_method'()` for defining virtual training points. The required output is the same as for the original set of points shown above  - list of tuples.
 
 <a name="propagation_model"></a>
 ## Implementation of New Propagation Models
