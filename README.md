@@ -11,6 +11,9 @@
 	- [Raw Data Format](#raw_data)
 	- [Generating and Storing Training Fingerprints](#fingerprints)
 	- [Enriching Functionality](#enriched-usage)
+  - [Implementation of New Virtual Training Points Definition Methods](#virutal_training_points)
+  - [Implementation of New Propagation Models](#propagation_model)
+  - [Accommodation of Multi-Wall model for New Environments](#multiwall)
 
 <a name="setup"></a>
 ## Requirements
@@ -101,3 +104,20 @@ This command will generate (if the new message is properly defined) a _raw_data_
 
 <a name="enriched-usage"></a>
 ## Enriching Functionality
+
+Generation of virtual training fingerprints can be performed with the script _virtualizeTrainingFingerprints.py_ in folder _help_functions_. In the script, one has to set the desired parameters: 
+
+* Database/collection that contains original training fingerprints; 
+* Enriched database/collection in which original and generated virtual training fingerprints are to be stored;
+* Virtual training points definition method (at the moment User or modified Voronoi based);
+* Propagation model (at the moment IDWI and Multi-wall);
+* BSSIDs of WiFI APs whose RSSIs are to be modeled in the defined virtual training points.
+
+<a name="virutal_training_points"></a>
+## Implementation of New Virtual Training Points Definition Methods
+
+<a name="propagation_model"></a>
+## Implementation of New Propagation Models
+
+<a name="multiwall"></a>
+## Accommodation of Multi-Wall model for New Environments
