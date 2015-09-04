@@ -13,7 +13,7 @@
 	- [Enriching Functionality](#enriched-usage)
   - [Implementation of New Virtual Points Definition Methods](#virutal_training_points)
   - [Implementation of New Propagation Models](#propagation_model)
-  - [Multi-Wall model in New Environments](#multiwall)
+  - [Multi-Wall Model in New Environments](#multiwall)
 
 <a name="setup"></a>
 ## Requirements
