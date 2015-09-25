@@ -20,12 +20,10 @@ import scipy
 import math
 import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
-
+from PIL import Image
 
 # The URL where server listens
 apiURL = 'http://localhost:5000/'
-image_name = 'twist_2nd_floor.jpg' # Name of the floor-plan for the multiwall model-based virtual fingerprints creation
 
 def virtual_point_user(coordinates):
     pass
@@ -186,17 +184,19 @@ def generate_virtual_fingerprints_idwi(coordinates,rssis,points,transmitters):
 def generate_virtual_fingerprints_multiwall(points, transmitters):
    """Propagation modeling based on Multiwall model"""
    
-   img, ap_locations, parameters, size = load_multiwall_parameters()
-   print size
+   img, img_size, ap_locations, parameters, size = load_multiwall_parameters()
+   print img_size
 
    return "bla"
 
 def load_multiwall_parameters():
     """"Loading data required for the Multiwall model"""
 
-    img = mpimg.imread('multiwall_model/' + image_name)
+    im = Image.open("multiwall_model/twist_2nd_floor.jpg")
+    img_size = im.size
+    img = im.load()
+    
     ap_locations_file = open('multiwall_model/AP_locations.txt', 'r')
-
     ap_locations = {}
     flag = 0
     for line in ap_locations_file:
@@ -207,6 +207,7 @@ def load_multiwall_parameters():
             ap_locations[line_clean[0]] = {}
             ap_locations[line_clean[0]]['coordinate_x'] = float(line_clean[1])
             ap_locations[line_clean[0]]['coordinate_y'] = float(line_clean[2])
+            ap_locations[line_clean[0]]['tx_power']     = float(line_clean[3])
 
     parameters_file = open('multiwall_model/multiwall_parameters.txt', 'r')
     parameters = {}
@@ -231,7 +232,7 @@ def load_multiwall_parameters():
             size['coordinate_x'] = float(line_clean[0])
             size['coordinate_y'] = float(line_clean[1])
 
-    return img, ap_locations, parameters, size
+    return img, img_size, ap_locations, parameters, size
     
 
 def distance_matrix(x0, y0, x1, y1):
