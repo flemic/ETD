@@ -112,7 +112,7 @@ def get_coordinates_rssi(db_id,coll_id,transmitters):
     return coordinates,rssis
 
 def store_virtual_fingerprints(db_id_original, coll_id_original, db_id_enriched, coll_id_enriched, points, virtual_fingerprints):
-    """Store original and virtaul training fingerprint in the same database"""
+    """Store original and virtual training fingerprint in the same database"""
 
     # Connect to the database MongoDB
     try:
@@ -672,20 +672,20 @@ def generate_virutal_training_fingerprints(db_id_original, coll_id_original, db_
     if db_id_original in db_names:
         db1 = connection[db_id_original]
     else:
-        return json.dumps("Database" + db_id_original + "doesn't exist!")
+        return json.dumps("Database " + db_id_original + " doesn't exist!")
     
     if db_id_enriched in db_names:
         db2 = connection[db_id_enriched]
     else:
-        return json.dumps("Database" + db_id_enriched + "doesn't exist!")      
+        return json.dumps("Database " + db_id_enriched + " doesn't exist!")      
     
     coll_names = db1.collection_names()
     if coll_id_original not in coll_names:
-        return json.dumps("Collection" + Coll_id_original + "doesn't exist!")
+        return json.dumps("Collection " + Coll_id_original + " doesn't exist!")
 
     coll_names = db2.collection_names()
     if coll_id_enriched not in coll_names:
-        return json.dumps("Collection" + coll_id_enriched + "doesn't exist!")
+        return json.dumps("Collection " + coll_id_enriched + " doesn't exist!")
 
     coordinates,rssis = get_coordinates_rssi(db_id_original, coll_id_original, parameters['transmitters'])
 
@@ -700,9 +700,9 @@ def generate_virutal_training_fingerprints(db_id_original, coll_id_original, db_
         virtual_fingerprints = EF.generate_virtual_fingerprints_idwi(coordinates, rssis, points, parameters['transmitters'])
         reply = store_virtual_fingerprints(db_id_original, coll_id_original, db_id_enriched, coll_id_enriched, points, virtual_fingerprints)
         return json.dumps(reply)
-
     elif parameters['propagation_model'] == 'Multiwall':
-        pass
+        virtual_fingerprints = EF.generate_virtual_fingerprints_multiwall(points, parameters['transmitters'])
+        return json.dumps(virtual_fingerprints)
     else:
         return "Unknown method for the generation of virtual training fingerprints"
 

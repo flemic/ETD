@@ -20,10 +20,12 @@ import scipy
 import math
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 
 
 # The URL where server listens
 apiURL = 'http://localhost:5000/'
+image_name = 'twist_2nd_floor.jpg' # Name of the floor-plan for the multiwall model-based virtual fingerprints creation
 
 def virtual_point_user(coordinates):
     pass
@@ -180,6 +182,57 @@ def generate_virtual_fingerprints_idwi(coordinates,rssis,points,transmitters):
                         virtual_fingerprints[iterate][transmitter].append(i)
 
     return virtual_fingerprints
+
+def generate_virtual_fingerprints_multiwall(points, transmitters):
+   """Propagation modeling based on Multiwall model"""
+   
+   img, ap_locations, parameters, size = load_multiwall_parameters()
+   print size
+
+   return "bla"
+
+def load_multiwall_parameters():
+    """"Loading data required for the Multiwall model"""
+
+    img = mpimg.imread('multiwall_model/' + image_name)
+    ap_locations_file = open('multiwall_model/AP_locations.txt', 'r')
+
+    ap_locations = {}
+    flag = 0
+    for line in ap_locations_file:
+        if flag == 0:
+            flag = 1
+        else:
+            line_clean = [x.strip() for x in line.split(',')]
+            ap_locations[line_clean[0]] = {}
+            ap_locations[line_clean[0]]['coordinate_x'] = float(line_clean[1])
+            ap_locations[line_clean[0]]['coordinate_y'] = float(line_clean[2])
+
+    parameters_file = open('multiwall_model/multiwall_parameters.txt', 'r')
+    parameters = {}
+    flag = 0
+    for line in parameters_file:
+        if flag == 0:
+            flag = 1
+        else:
+            line_clean = [x.strip() for x in line.split(',')]
+            parameters['gamma'] = float(line_clean[0])
+            parameters['lc']    = float(line_clean[1])
+            parameters['wall']  = float(line_clean[2]) 
+
+    size_file = open('multiwall_model/floor_size.txt', 'r')
+    size = {}
+    flag = 0
+    for line in size_file:
+        if flag == 0:
+            flag = 1
+        else:
+            line_clean = [x.strip() for x in line.split(',')]
+            size['coordinate_x'] = float(line_clean[0])
+            size['coordinate_y'] = float(line_clean[1])
+
+    return img, ap_locations, parameters, size
+    
 
 def distance_matrix(x0, y0, x1, y1):
     """Provides a distance matrix between all locations"""

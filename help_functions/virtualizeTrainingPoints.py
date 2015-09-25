@@ -22,20 +22,21 @@ from generateURL import RequestWithMethod
 apiURL = 'http://localhost:5000/'
 
 # ID of the database where original training fingerprints are stored
-db_id_training = 'db_id_training'
+db_id_training = 'wifi_beacon_rssi_twist_small_macbook'
 
 # ID of the collection in the database original training fingerprints are stored
-coll_id_training = 'coll_id_training'
+coll_id_training = 'training_quantile'
 
 # ID of the database where original and virtual training fingerprints should be stored
-db_id_enriched = 'db_id_enriched'
+db_id_enriched = 'wifi_beacon_rssi_twist_small_macbook'
 
 # The ID of the collection where original and virtual training fingerprints should be stored
-coll_id_enriched = 'coll_id_enriched'
+coll_id_enriched = 'training_quantile'
 
 parameters= {}
 parameters['define_virtual_points'] = 'Voronoi' # User or Voronoi
-parameters['propagation_model'] = 'IDWI'        # IDWI or Multiwall
+parameters['propagation_model'] = 'Multiwall'   # IDWI or Multiwall
+
 # Define WiFi APs (BSSIDs) that you want to use in the propagation modeling. 
 parameters['transmitters'] = ['64:70:02:3e:aa:ef','64:70:02:3e:9f:63','64:70:02:3e:aa:11','64:70:02:3e:aa:d9']
 

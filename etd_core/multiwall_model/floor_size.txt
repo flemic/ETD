@@ -1,0 +1,2 @@
+coordinate_x, coordinate_y
+30.87, 15.56

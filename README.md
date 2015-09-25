@@ -155,6 +155,8 @@ The user should then be able to implement a new method `virtual_point_'new_metho
 
 <a name="propagation_model"></a>
 ## Implementation of New Propagation Models
+New propagation model can be easily implemented. Slight modifications of the _etd_core.py_ script are needed for defining a new model name and the function name (if-else statement starting from line 699 has to be extended). Additionally, a new model has to be implemented in the _enriching_funtionality.py_ script.    
 
 <a name="multiwall"></a>
 ## Multi-Wall model in New Environments
+For accommodating the multi-wall model for new environments, one has to modify the following in the _multiwall_model_ folder. Firstly, one need a footprint of the new environment. Secondly, one has to define the physical dimensions of the new environment in the _floor_size.txt_ file, following the provided format. Finally, at the moment one has to define the transmitters locations and their TX power, as well as the parameters of the multi-wall model. Estimation of the transmitters locations and multi-wall parameters is the next feature  -will be added soon. 
