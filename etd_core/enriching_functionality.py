@@ -185,7 +185,8 @@ def generate_virtual_fingerprints_multiwall(points, transmitters):
    """Propagation modeling based on Multiwall model"""
    
    img, img_size, ap_locations, parameters, size = load_multiwall_parameters()
-   print img_size
+
+   
 
    return "bla"
 
