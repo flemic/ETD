@@ -183,12 +183,25 @@ def generate_virtual_fingerprints_idwi(coordinates,rssis,points,transmitters):
 
 def generate_virtual_fingerprints_multiwall(points, transmitters):
    """Propagation modeling based on Multiwall model"""
-   
+
    img, img_size, ap_locations, parameters, size = load_multiwall_parameters()
+   virtual_fingerprints = {}
+   for point in range(0,len(points)):
+        virtual_fingerprints[point] = {}
+        for transmitter in transmitters:
+            value = model_multiwall()
+            try:
+                virtual_fingerprints[point][transmitter].append(value)
+            except:
+                virtual_fingerprints[point][transmitter] = []
+                virtual_fingerprints[point][transmitter].append(value)
 
-   
+   return virtual_fingerprints
 
-   return "bla"
+
+def model_multiwall():
+    pass
+
 
 def load_multiwall_parameters():
     """"Loading data required for the Multiwall model"""
