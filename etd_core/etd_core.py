@@ -702,7 +702,8 @@ def generate_virutal_training_fingerprints(db_id_original, coll_id_original, db_
         return json.dumps(reply)
     elif parameters['propagation_model'] == 'Multiwall':
         virtual_fingerprints = EF.generate_virtual_fingerprints_multiwall(points, parameters['transmitters'])
-        return json.dumps(virtual_fingerprints)
+        reply = store_virtual_fingerprints(db_id_original, coll_id_original, db_id_enriched, coll_id_enriched, points, virtual_fingerprints)
+        return json.dumps(reply)
     else:
         return "Unknown method for the generation of virtual training fingerprints"
 
